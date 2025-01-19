@@ -1,0 +1,65 @@
+[
+    {
+      "id": "4",
+      "name": "UltraBoost Kids Shoes",
+      "category": "Kids' Running",
+      "imageUrl": [
+        "https://example.com/image6.jpg",
+        "https://example.com/image7.jpg"
+      ],
+      "oldPrice": "1499.00",
+      "sizes": [
+        { "size": "1.0", "isSelected": false },
+        { "size": "1.5", "isSelected": false },
+        { "size": "2.0", "isSelected": false },
+        { "size": "2.5", "isSelected": false },
+        { "size": "3.0", "isSelected": false },
+        { "size": "3.5", "isSelected": false }
+      ],
+      "price": "69.00",
+      "description": "Designed for little adventurers...",
+      "title": "Adidas UltraBoost Kids: Comfort and Support"
+    },
+    {
+      "id": "5",
+      "name": "NMD S1 Kids Shoes",
+      "category": "Kids' Casual",
+      "imageUrl": [
+        "https://example.com/image8.jpg",
+        "https://example.com/image9.jpg"
+      ],
+      "oldPrice": "1199.00",
+      "sizes": [
+        { "size": "10.0", "isSelected": false },
+        { "size": "10.5", "isSelected": false },
+        { "size": "11.0", "isSelected": false },
+        { "size": "11.5", "isSelected": false },
+        { "size": 12.0, "isSelected": false }
+      ],
+      "price": "89.00",
+      "description": "A playful twist on the iconic NMD...",
+      "title": "Adidas NMD S1 Kids: Style for Little Feet"
+    },
+    {
+      "id": "6",
+      "name": "FortRun X Shoes",
+      "category": "Kids' Running",
+      "imageUrl": [
+        "https://example.com/image10.jpg",
+        "https://example.com/image11.jpg"
+      ],
+      "oldPrice": "999.00",
+      "sizes": [
+        { "size": "1.0", "isSelected": false },
+        { "size": "1.5", "isSelected": false },
+        { "size": "2.0", "isSelected": false },
+        { "size": 2.5, "isSelected": false },
+        { "size": 3.0, "isSelected": false },
+        { "size": 3.5, "isSelected": false },
+        { "size": 4.0, "isSelected": false }
+      ],
+      "price": "59.00",
+      "description": "Made for all-day play...",
+      "title": "Adidas FortRun X: Fun Runs for Kids"
+    }
+  ]

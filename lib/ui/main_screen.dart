@@ -26,7 +26,9 @@ class MainScreen extends StatelessWidget {
     return Consumer<MainScreenNotifier>(
         builder: (context, mainScreenNotifier, child) {
       return Scaffold(
-        backgroundColor: const Color(0xFFE2E2E2),
+        // backgroundColor: const Color(0xFFE2E2E2),
+
+        backgroundColor: Colors.grey.shade400,
         body: pageList[mainScreenNotifier.pageIndex],
         bottomNavigationBar: const BottomNavBar(),
       );
