@@ -1,0 +1,119 @@
+[
+  {
+    "id": "1",
+    "name": "UltraBoost 22",
+    "category": "Men's Running",
+    "imageUrl": [
+      "https://media.istockphoto.com/id/679539084/photo/indian-made-mens-shoes.jpg?s=612x612&w=is&k=20&c=JX8aZZEzf0HRaoZNDPbQ5JtbIDQp_YcADwGNSo_gysY=",
+      "https://media.istockphoto.com/id/1180797553/photo/a-pair-of-brown-suede-mens-youth-shoes.jpg?s=612x612&w=is&k=20&c=MpILRHlalVI6M2SHu-CfUdrhOiC9hYep41G7AhGwGLM="
+    ],
+    "oldPrice": "1999.00",
+    "sizes": [
+      { "size": "6.0", "isSelected": false },
+      { "size": "6.5", "isSelected": false },
+      { "size": "7.0", "isSelected": false },
+      { "size": "7.5", "isSelected": false },
+      { "size": "8.0", "isSelected": false },
+      { "size": "8.5", "isSelected": false },
+      { "size": "9.0", "isSelected": false }
+    ],
+    "price": "1599.00",
+    "description": "Experience unparalleled comfort...",
+    "title": "Adidas UltraBoost 22: The Next Level of Running",
+    "ratings": 4.5,
+    "reviews": 123
+  },
+  {
+    "id": "2",
+    "name": "NMD S1 Shoes",
+    "category": "Men's Casual",
+    "imageUrl": [
+      "https://media.istockphoto.com/id/1181483509/photo/leather-mens-shoes-ankle-boots.jpg?s=612x612&w=is&k=20&c=SKlzOvavRWWMiKE59XHNuDziLN3DNb3LxdZaMjMcbp4=",
+      "https://media.istockphoto.com/id/1181500175/photo/leather-mens-shoes.jpg?s=612x612&w=0&k=20&c=xqG8dx3QS0D3Nc1nw50q8_22ucFCOE-VFDH0O2-tHvo="
+    ],
+    "oldPrice": "1499.00",
+    "sizes": [
+      { "size": "7.0", "isSelected": false },
+      { "size": "7.5", "isSelected": false },
+      { "size": "8.0", "isSelected": false },
+      { "size": "8.5", "isSelected": false },
+      { "size": "9.0", "isSelected": false },
+      { "size": "9.5", "isSelected": false },
+      { "size": "10.0", "isSelected": false }
+    ],
+    "price": "1199.00",
+    "description": "A progressive take on a streetwear icon...",
+    "ratings": 4.4,
+    "reviews": 132
+  },
+  {
+    "id": "3",
+    "name": "Swift Run X Shoes",
+    "category": "Men's Casual",
+    "imageUrl": [
+      "https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    ],
+    "oldPrice": "1299.00",
+    "sizes": [
+      { "size": "5.5", "isSelected": false },
+      { "size": "6.0", "isSelected": false },
+      { "size": "6.5", "isSelected": false },
+      { "size": "7.0", "isSelected": false },
+      { "size": "7.5", "isSelected": false },
+      { "size": "8.0", "isSelected": false },
+      { "size": "8.5", "isSelected": false }
+    ],
+    "price": "2099.00",
+    "description": "Lightweight and responsive for...",
+    "title": "Adidas Swift Run X: Run with Confidence",
+    "ratings": 4.2,
+    "reviews": 89
+  },
+  {
+    "id": "4",
+    "name": "Nike",
+    "category": "Men's Casual",
+    "imageUrl": [
+      "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://example.com/image2.jpg"
+    ],
+    "oldPrice": "?",
+    "sizes": [
+      { "size": "7.0", "isSelected": false },
+      { "size": "7.5", "isSelected": false },
+      { "size": "8.0", "isSelected": false },
+      { "size": "8.5", "isSelected": false },
+      { "size": "9.0", "isSelected": false },
+      { "size": "9.5", "isSelected": false },
+      { "size": "10.0", "isSelected": false }
+    ],
+    "price": "1999",
+    "description": "Lightweight and responsive for...",
+    "title": "Adidas Swift Run X: Run with Confidence",
+    "ratings": 4.2,
+    "reviews": 44
+  },
+  {
+    "id": "5",
+    "name": "Converse",
+    "category": "Men's Casual ",
+    "imageUrl": [
+      "https://images.pexels.com/photos/1598508/pexels-photo-1598508.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    ],
+    "oldPrice": "?",
+    "sizes": [
+      { "size": "5.5", "isSelected": false },
+      { "size": "6.0", "isSelected": false },
+      { "size": "6.5", "isSelected": false },
+      { "size": "7.0", "isSelected": false },
+      { "size": "7.5", "isSelected": false },
+      { "size": "8.0", "isSelected": false },
+      { "size": "8.5", "isSelected": false }
+    ],
+    "price": "2099",
+    "description": "Lightweight and responsive for...",
+    "title": "Adidas Swift Run X: Run with Confidence",
+    "ratings": 4.3,
+    "reviews": 123
+  }
+]

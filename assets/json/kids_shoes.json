@@ -1,12 +1,12 @@
 [
     {
-      "id": "4",
-      "name": "UltraBoost Kids Shoes",
+      "id": "6",
+      "name": "UltraBoost Shoes",
       "category": "Kids' Running",
       "imageUrl": [
-        "https://example.com/image6.jpg",
-        "https://example.com/image7.jpg"
-      ],
+      "https://media.istockphoto.com/id/1181483509/photo/leather-mens-shoes-ankle-boots.jpg?s=612x612&w=is&k=20&c=SKlzOvavRWWMiKE59XHNuDziLN3DNb3LxdZaMjMcbp4=",
+      "https://media.istockphoto.com/id/1181500175/photo/leather-mens-shoes.jpg?s=612x612&w=0&k=20&c=xqG8dx3QS0D3Nc1nw50q8_22ucFCOE-VFDH0O2-tHvo="
+    ],
       "oldPrice": "1499.00",
       "sizes": [
         { "size": "1.0", "isSelected": false },
@@ -16,17 +16,19 @@
         { "size": "3.0", "isSelected": false },
         { "size": "3.5", "isSelected": false }
       ],
-      "price": "69.00",
+      "price": "1069.00",
       "description": "Designed for little adventurers...",
-      "title": "Adidas UltraBoost Kids: Comfort and Support"
+      "title": "Adidas UltraBoost Kids: Comfort and Support",
+      "ratings": 4.6,
+      "reviews": 111
     },
     {
-      "id": "5",
+      "id": "7",
       "name": "NMD S1 Kids Shoes",
       "category": "Kids' Casual",
       "imageUrl": [
-        "https://example.com/image8.jpg",
-        "https://example.com/image9.jpg"
+        "https://images.pexels.com/photos/1159670/pexels-photo-1159670.jpeg?auto=compress&cs=tinysrgb&w=400",
+        "https://images.pexels.com/photos/1478442/pexels-photo-1478442.jpeg?auto=compress&cs=tinysrgb&w=400"
       ],
       "oldPrice": "1199.00",
       "sizes": [
@@ -36,17 +38,19 @@
         { "size": "11.5", "isSelected": false },
         { "size": 12.0, "isSelected": false }
       ],
-      "price": "89.00",
+      "price": "1089.00",
       "description": "A playful twist on the iconic NMD...",
-      "title": "Adidas NMD S1 Kids: Style for Little Feet"
+      "title": "Adidas NMD S1 Kids: Style for Little Feet",
+      "ratings": 4.2,
+      "reviews": 101
     },
     {
-      "id": "6",
+      "id": "8",
       "name": "FortRun X Shoes",
       "category": "Kids' Running",
       "imageUrl": [
-        "https://example.com/image10.jpg",
-        "https://example.com/image11.jpg"
+        "https://images.pexels.com/photos/1240892/pexels-photo-1240892.jpeg?auto=compress&cs=tinysrgb&w=400",
+        "https://images.pexels.com/photos/292999/pexels-photo-292999.jpeg?auto=compress&cs=tinysrgb&w=400"
       ],
       "oldPrice": "999.00",
       "sizes": [
@@ -58,8 +62,10 @@
         { "size": 3.5, "isSelected": false },
         { "size": 4.0, "isSelected": false }
       ],
-      "price": "59.00",
+      "price": "1059.00",
       "description": "Made for all-day play...",
-      "title": "Adidas FortRun X: Fun Runs for Kids"
+      "title": "Adidas FortRun X: Fun Runs for Kids",
+      "ratings": 4.2,
+      "reviews": 133
     }
   ]

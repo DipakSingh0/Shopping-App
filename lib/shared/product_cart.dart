@@ -9,13 +9,18 @@ class ProductCart extends StatefulWidget {
       required this.category,
       required this.name,
       required this.id,
-      required this.image});
+      required this.image,
+      required this.ratings,
+      required this.reviews
+      });
 
   final String price;
   final String category;
   final String name;
   final String id;
   final String image;
+  final double reviews;
+  final double ratings;
 
   @override
   State<ProductCart> createState() => _ProductCartState();
@@ -30,20 +35,19 @@ class _ProductCartState extends State<ProductCart> {
         child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(16)),
             child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width * 0.6,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white,
-                    spreadRadius: 1,
-                    blurRadius: 8,
-                    offset: Offset(1, 1),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width * 0.6,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.white,
+                      spreadRadius: 1,
+                      blurRadius: 8,
+                      offset: Offset(1, 1),
+                    ),
+                  ],
+                ),
+                child: Column(children: [
                   Stack(
                     children: [
                       Container(
@@ -51,19 +55,18 @@ class _ProductCartState extends State<ProductCart> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(widget
-                                .image), // Assuming 'image' is a variable holding the image URL
-                            fit: BoxFit.cover, // Adjust fit as needed
+                                .image),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
                       Positioned(
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                                onTap: null,
-                                child:
-                                    Icon(CommunityMaterialIcons.heart_outline)),
-                          ))
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                            onTap: null,
+                            child: Icon(CommunityMaterialIcons.heart_outline)),
+                      ))
                     ],
                   ),
                   Padding(
@@ -73,11 +76,11 @@ class _ProductCartState extends State<ProductCart> {
                           Text(
                             widget.name,
                             style: appStyleWithHt(
-                                36, Colors.black, FontWeight.bold, 1.1),
+                                24, Colors.black, FontWeight.bold, 1.1),
                           ),
                           Text(widget.category,
                               style: appStyleWithHt(
-                                  18, Colors.grey, FontWeight.bold, 1.5)),
+                                  16, Colors.grey, FontWeight.bold, 1.5)),
                         ],
                       )),
                   Padding(
@@ -87,7 +90,7 @@ class _ProductCartState extends State<ProductCart> {
                       children: [
                         Text(
                           widget.price.toString(),
-                          style: appStyle(30, Colors.black, FontWeight.w600),
+                          style: appStyle(20, Colors.black, FontWeight.w600),
                         ),
                         Row(
                             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,21 +98,104 @@ class _ProductCartState extends State<ProductCart> {
                               Text(
                                 "Colors",
                                 style:
-                                    appStyle(18, Colors.grey, FontWeight.w500),
+                                    appStyle(15, Colors.grey, FontWeight.w600),
                               ),
                               SizedBox(width: 5),
-
-                              ChoiceChip(label: Text(""),
-                               selected: selected , 
-                               visualDensity: VisualDensity.compact,
-                               selectedColor: Colors.black,
-                               )
-                            ])
+                              ChoiceChip(
+                                label: Text(""),
+                                selected: selected,
+                                visualDensity: VisualDensity.compact,
+                                selectedColor: Colors.black,
+                              )
+                            ]),
                       ],
                     ),
                   ),
-                ],
-              ),
-            )));
+                  // RatingsRowWidget(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                              size: 18,
+                            ),
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            widget.ratings.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            widget.reviews.toString(),
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ]))));
   }
 }
+
+// class RatingsRowWidget extends StatelessWidget {
+//   const RatingsRowWidget({
+//     super.key,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//       children: [
+//         Row(
+//           children: [
+//             Padding(
+//               padding: const EdgeInsets.only(left:12.0),
+//               child: Icon(
+//                 Icons.star,
+//                 color: Colors.amber,
+//                 size: 18,
+//               ),
+//             ),
+//             SizedBox(width: 4),
+//             Text(
+//                widget.ratings.toString(),
+//               // "4.5",
+//               style: TextStyle(
+//                 fontWeight: FontWeight.bold,
+//                 fontSize: 16,
+//               ),
+//             ),
+//           ],
+//         ),
+//         Expanded(
+//           child: Center(
+//             child: Text(
+//               widget.reviews.toString(),
+//               // "123 reviews",
+//               style: TextStyle(
+//                 color: Colors.grey[600],
+//                 fontSize: 14,
+//               ),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

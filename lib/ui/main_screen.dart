@@ -7,6 +7,8 @@ import 'package:shop/ui/home_page.dart';
 import 'package:shop/ui/profile_page.dart';
 import 'package:shop/ui/search_page.dart';
 
+import 'product_by_cart.dart';
+
 // ignore: must_be_immutable
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
@@ -14,7 +16,7 @@ class MainScreen extends StatelessWidget {
   List<Widget> pageList = const [
     HomePage(),
     SearchPage(),
-    HomePage(),
+    ProductByCart(),
     CartPage(),
     ProfilePage(),
   ];
