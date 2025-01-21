@@ -16,6 +16,7 @@ dependencies:
   community_material_icon: ^5.9.55
   font_awesome_flutter: ^10.8.0
   flutter_staggered_grid_view: ^0.7.0
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:
@@ -27,4 +28,5 @@ flutter:
   assets:
     - assets/
     - assets/images/
-    - assets/json/  # Added this line to include the json directory
+    - assets/images/adidas.png
+    - assets/json/ 

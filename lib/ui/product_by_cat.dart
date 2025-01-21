@@ -7,16 +7,16 @@ import 'package:shop/shared/category_button.dart';
 import 'package:shop/shared/custom_spacer.dart';
 import 'package:shop/shared/latest_shoe.dart';
 
-class ProductByCart extends StatefulWidget {
-  const ProductByCart({super.key, required this.tabIndex});
+class ProductByCat extends StatefulWidget {
+  const ProductByCat({super.key, required this.tabIndex});
 
   final int tabIndex;
 
   @override
-  State<ProductByCart> createState() => _ProductByCartState();
+  State<ProductByCat> createState() => _ProductByCatState();
 }
 
-class _ProductByCartState extends State<ProductByCart>
+class _ProductByCatState extends State<ProductByCat>
     with TickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 3, vsync: this);
@@ -163,99 +163,110 @@ class _ProductByCartState extends State<ProductByCart>
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.72,
-                child: Column(
-                  children: [
-                    const CustomSpacer(),
-                    Text(
-                      "Filter",
-                      style: appStyle(40, Colors.black, FontWeight.bold),
-                    ),
-                    const CustomSpacer(),
-                    Text(
-                      "Gender",
-                      style: appStyle(24, Colors.black, FontWeight.w600),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Row(
+                child: Column(children: [
+                  const CustomSpacer(),
+                  Text(
+                    "Filter",
+                    style: appStyle(40, Colors.black, FontWeight.bold),
+                  ),
+                  const CustomSpacer(),
+                  Text(
+                    "Gender",
+                    style: appStyle(24, Colors.black, FontWeight.w600),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CategoryButton(buttonColor: Colors.black, label: "Men"),
+                      CategoryButton(buttonColor: Colors.grey, label: "Women"),
+                      CategoryButton(buttonColor: Colors.grey, label: "Kids"),
+                      CustomSpacer(),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    "Category",
+                    style: appStyle(24, Colors.black, FontWeight.w600),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CategoryButton(buttonColor: Colors.black, label: "Men"),
+                      CategoryButton(buttonColor: Colors.grey, label: "Women"),
+                      CategoryButton(buttonColor: Colors.grey, label: "Kids"),
+                    ],
+                  ),
+                  const CustomSpacer(),
+                  Text("Price",
+                      style: appStyle(24, Colors.black, FontWeight.w600)),
+                  const CustomSpacer(),
+                  Slider(
+                    value: _value,
+                    activeColor: Colors.black,
+                    inactiveColor: Colors.grey,
+                    thumbColor: Colors.black,
+                    max: 500,
+                    label: _value.toString(),
+                    divisions: 50,
+                    secondaryTrackValue: 200,
+                    onChanged: (double value) {},
+                  ),
+                  const CustomSpacer(),
+                  Text("Brand",
+                      style: appStyle(20, Colors.black, FontWeight.bold)),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Expanded(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        CategoryButton(buttonColor: Colors.black, label: "Men"),
-                        CategoryButton(
-                            buttonColor: Colors.grey, label: "Women"),
-                        CategoryButton(buttonColor: Colors.grey, label: "Kids"),
-                        CustomSpacer(),
+                        ClipRect(
+                            child: Image.asset('assets/images/adidas.png')),
+                        ClipRect(child: Image.asset('assets/images/gucci.png')),
+                        ClipRect(child: Image.asset('assets/images/nike.png')),
+                        ClipRect(
+                            child: Image.asset('assets/images/jordan.png')),
                       ],
                     ),
-                    const SizedBox(
-                      height: 15,
+                  )
+                ]
+                    //           Container(
+                    //             padding: EdgeInsets.all(8),
+                    //             height: 8,
+                    //             child: ListView.builder(
+                    //                 itemCount: 4,
+                    //                 scrollDirection: Axis.horizontal,
+                    //                 itemBuilder: (context, index) {
+                    //                   return Padding(
+                    //                     padding: EdgeInsets.all(8),
+                    //                     child: Container(
+                    //                       decoration: BoxDecoration(
+                    //                         color: Colors.grey.shade200,
+                    //                         borderRadius: BorderRadius.all(
+                    //                           Radius.circular(12),
+                    //                         ),
+                    //                       ),
+                    //                       child: Image.asset(
+                    //                         brand[index],
+                    //                         height: 60,
+                    //                         width: 80,
+                    //                         color: Colors.black,
+                    //                       ),
+                    //                     ),
+                    //                   );
+                    //                 }),
+                    //           )
+                    //         ],
                     ),
-                    Text(
-                      "Category",
-                      style: appStyle(24, Colors.black, FontWeight.w600),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CategoryButton(buttonColor: Colors.black, label: "Men"),
-                        CategoryButton(
-                            buttonColor: Colors.grey, label: "Women"),
-                        CategoryButton(buttonColor: Colors.grey, label: "Kids"),
-                      ],
-                    ),
-                    const CustomSpacer(),
-                    Text("Price",
-                        style: appStyle(24, Colors.black, FontWeight.w600)),
-                    const CustomSpacer(),
-                    Slider(
-                      value: _value,
-                      activeColor: Colors.black,
-                      inactiveColor: Colors.grey,
-                      thumbColor: Colors.black,
-                      max: 500,
-                      label: _value.toString(),
-                      divisions: 50,
-                      secondaryTrackValue: 200,
-                      onChanged: (double value) {},
-                    ),
-                    const CustomSpacer(),
-                    Text("Brand",
-                        style: appStyle(20, Colors.black, FontWeight.bold)),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      height: 8,
-                      child: ListView.builder(
-                          itemCount: 4,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(12),
-                                  ),
-                                ),
-                                child: Image.asset(
-                                  brand[index],
-                                  height: 60,
-                                  width: 80,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            );
-                          }),
-                    )
-                  ],
-                ),
               ),
             ],
           )),

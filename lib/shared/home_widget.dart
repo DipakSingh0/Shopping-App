@@ -1,8 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/controllers/product_notifier.dart';
 import 'package:shop/models/sneakers_model.dart';
-import 'package:shop/ui/product_by_cart.dart';
+import 'package:shop/ui/product_by_cat.dart';
+import '../ui/product_page.dart';
 import 'appstyle.dart';
 import 'new_shoes.dart';
 import 'product_cart.dart';
@@ -21,6 +24,8 @@ class HomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var productNotifier = Provider.of<ProductNotifier>(context);
+
     return Column(
       children: [
         // --------------1st listview horizontal----------------//
@@ -43,14 +48,25 @@ class HomeWidget extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         final shoe = snapshot.data![index];
-                        return ProductCart(
-                          price: "Rs.${shoe.price}",
-                          category: shoe.category,
-                          name: shoe.name,
-                          id: shoe.id,
-                          image: shoe.imageUrl[0],
-                          ratings: shoe.ratings ?? 0.0,
-                          reviews: shoe.reviews ?? 0,
+                        return 
+                        GestureDetector(
+                          onTap: (){
+                            productNotifier.shoesSizes = shoe.sizes;
+                            print(productNotifier.shoesSizes);
+                            Navigator.push(context , 
+                            MaterialPageRoute(builder: (context) => 
+                            ProductPage(id: shoe.id , category : shoe.category)
+                            ));
+                          },
+                          child: ProductCart(
+                            price: "Rs.${shoe.price}",
+                            category: shoe.category,
+                            name: shoe.name,
+                            id: shoe.id,
+                            image: shoe.imageUrl[0],
+                            ratings: shoe.ratings ?? 0.0,
+                            reviews: shoe.reviews ?? 0,
+                          ),
                         );
                       });
                 }
@@ -72,7 +88,7 @@ class HomeWidget extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ProductByCart(
+                              builder: (context) => ProductByCat(
                                     tabIndex: tabIndex,
                                   )));
                     },
