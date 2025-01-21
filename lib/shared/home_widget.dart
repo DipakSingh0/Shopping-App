@@ -1,8 +1,8 @@
-
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:shop/models/sneakers_model.dart';
+import 'package:shop/ui/product_by_cart.dart';
 import 'appstyle.dart';
 import 'new_shoes.dart';
 import 'product_cart.dart';
@@ -12,10 +12,12 @@ class HomeWidget extends StatelessWidget {
     super.key,
     required this.ScreenSize,
     required Future<List<Sneakers>> male,
+    required this.tabIndex,
   }) : _male = male;
 
   final Size ScreenSize;
   final Future<List<Sneakers>> _male;
+  final int tabIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,8 @@ class HomeWidget extends StatelessWidget {
           child: FutureBuilder<List<Sneakers>>(
               future: _male,
               builder: (context, snapshot) {
-                if (snapshot.connectionState ==
-                    ConnectionState.waiting) {
-                  return Center(
-                      child: CircularProgressIndicator());
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Text("Error ${snapshot.error}");
                 } else {
@@ -41,20 +41,17 @@ class HomeWidget extends StatelessWidget {
                   return ListView.builder(
                       itemCount: male!.length,
                       scrollDirection: Axis.horizontal,
-                      
                       itemBuilder: (context, index) {
                         final shoe = snapshot.data![index];
                         return ProductCart(
-                         
-
-                            price: "Rs.${shoe.price}",
-                            category: shoe.category,
-                            name: shoe.name,
-                            id: shoe.id,
-                            image: shoe.imageUrl[0], 
-                            ratings: shoe.ratings ?? 0.0 , 
-                            reviews: shoe.reviews ?? 0 ,
-                            );
+                          price: "Rs.${shoe.price}",
+                          category: shoe.category,
+                          name: shoe.name,
+                          id: shoe.id,
+                          image: shoe.imageUrl[0],
+                          ratings: shoe.ratings ?? 0.0,
+                          reviews: shoe.reviews ?? 0,
+                        );
                       });
                 }
               }),
@@ -68,19 +65,27 @@ class HomeWidget extends StatelessWidget {
                 children: [
                   Text(
                     "Latest Shoes",
-                    style: appStyle(
-                        24, Colors.black, FontWeight.bold),
+                    style: appStyle(24, Colors.black, FontWeight.bold),
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "View All",
-                        style: appStyle(
-                            20, Colors.black, FontWeight.w500),
-                      ),
-                      //  Icon(AntDesign.caretright , size: 20),
-                      Icon(Icons.arrow_forward_ios, size: 20)
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductByCart(
+                                    tabIndex: tabIndex,
+                                  )));
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          "View All",
+                          style: appStyle(20, Colors.black, FontWeight.w500),
+                        ),
+                        //  Icon(AntDesign.caretright , size: 20),
+                        Icon(Icons.arrow_forward_ios, size: 20)
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -91,14 +96,12 @@ class HomeWidget extends StatelessWidget {
           height: ScreenSize.height * 0.14,
           // color: Colors.amber,
           // --------------2nd listview horizontal----------------//
-    
+
           child: FutureBuilder<List<Sneakers>>(
               future: _male,
               builder: (context, snapshot) {
-                if (snapshot.connectionState ==
-                    ConnectionState.waiting) {
-                  return Center(
-                      child: CircularProgressIndicator());
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Text("Error ${snapshot.error}");
                 } else {

@@ -45,61 +45,66 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     var ScreenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      // backgroundColor: Colors.white,
-      backgroundColor: Colors.grey.shade400,
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: Stack(
-          children: [
-            Container(
-                padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
-                height: ScreenSize.height,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/images/top_image.jpg"),
-                        fit: BoxFit.fill)),
-                child: Container(
-                  padding: const EdgeInsets.only(left: 8, bottom: 8),
-                  width: ScreenSize.width,
-                  // height: MediaQuery.of(context).size.height,
+    return SafeArea(
+      child: Scaffold(
+        // backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.shade400,
+        body: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: [
+              Container(
+                  padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
+                  height: ScreenSize.height,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/images/top_image.jpg"),
+                          fit: BoxFit.fill)),
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 8, bottom: 8),
+                    width: ScreenSize.width,
+                    // height: MediaQuery.of(context).size.height,
 
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Athletics Shoes \n Collection",
-                          style: appStyleWithHt(
-                              34, Colors.white, FontWeight.bold, 1.5)),
-                      TabBar(
-                          padding: EdgeInsets.zero,
-                          indicatorSize: TabBarIndicatorSize.label,
-                          indicatorColor: Colors.transparent,
-                          controller: _tabController,
-                          isScrollable: true,
-                          labelColor: Colors.white,
-                          labelStyle:
-                              appStyle(20, Colors.white, FontWeight.bold),
-                          unselectedLabelColor: Colors.grey.withOpacity(0.5),
-                          tabs: const [
-                            Tab(text: "Men Shoes"),
-                            Tab(text: "Women Shoes"),
-                            Tab(text: "Kids Shoes"),
-                          ]),
-                    ],
-                  ),
-                )),
-            Padding(
-              padding: EdgeInsets.only(top: ScreenSize.height * 0.24),
-              child: Container(
-                padding: const EdgeInsets.only(left: 8),
-                child: TabBarView(controller: _tabController, children: [
-                  HomeWidget(ScreenSize: ScreenSize, male: _male),
-                  HomeWidget(ScreenSize: ScreenSize, male: _female),
-                  HomeWidget(ScreenSize: ScreenSize, male: _kids),
-                ]),
-              ),
-            )
-          ],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Athletics Shoes \n Collection",
+                            style: appStyleWithHt(
+                                34, Colors.white, FontWeight.bold, 1.5)),
+                        TabBar(
+                            padding: EdgeInsets.zero,
+                            indicatorSize: TabBarIndicatorSize.label,
+                            indicatorColor: Colors.transparent,
+                            controller: _tabController,
+                            isScrollable: true,
+                            labelColor: Colors.white,
+                            labelStyle:
+                                appStyle(20, Colors.white, FontWeight.bold),
+                            unselectedLabelColor: Colors.grey.withOpacity(0.5),
+                            tabs: const [
+                              Tab(text: "Men Shoes"),
+                              Tab(text: "Women Shoes"),
+                              Tab(text: "Kids Shoes"),
+                            ]),
+                      ],
+                    ),
+                  )),
+              Padding(
+                padding: EdgeInsets.only(top: ScreenSize.height * 0.24),
+                child: Container(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: TabBarView(controller: _tabController, children: [
+                    HomeWidget(
+                        ScreenSize: ScreenSize, male: _male, tabIndex: 0),
+                    HomeWidget(
+                        ScreenSize: ScreenSize, male: _female, tabIndex: 1),
+                    HomeWidget(
+                        ScreenSize: ScreenSize, male: _kids, tabIndex: 2),
+                  ]),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

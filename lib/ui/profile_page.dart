@@ -11,12 +11,11 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-    
-        body: Center(
-          child: Text("Profile" , 
-          style: appStyle( 40 ,Colors.black ,  FontWeight.bold)
-          )
-    ));
+    return SafeArea(
+      child: Scaffold(
+          body: Center(
+              child: Text("Profile",
+                  style: appStyle(40, Colors.black, FontWeight.bold)))),
+    );
   }
 }
