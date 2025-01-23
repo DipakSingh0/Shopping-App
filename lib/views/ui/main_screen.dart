@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/controllers/mainscreen_notifier.dart';
-import 'package:shop/shared/bottom_nav_bar.dart';
-import 'package:shop/ui/cart_page.dart';
-import 'package:shop/ui/home_page.dart';
-import 'package:shop/ui/profile_page.dart';
-import 'package:shop/ui/search_page.dart';
+import 'package:shop/views/shared/bottom_nav_bar.dart';
+import 'package:shop/views/ui/cart_page.dart';
+import 'package:shop/views/ui/favorites.dart';
+import 'package:shop/views/ui/home_page.dart';
+import 'package:shop/views/ui/profile_page.dart';
+import 'package:shop/views/ui/search_page.dart';
 
 // import 'product_by_cart.dart';
 
@@ -13,13 +14,13 @@ import 'package:shop/ui/search_page.dart';
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
 
-  List<Widget> pageList = const [
-    HomePage(),
-    SearchPage(),
-    // ProductByCart(),
-    HomePage(),
+  List<Widget> pageList = [
+    const HomePage(),
+    const SearchPage(),
+    // const HomePage(),
+    const Favorites(),
     CartPage(),
-    ProfilePage(),
+    const ProfilePage(),
   ];
 
   @override
@@ -29,8 +30,6 @@ class MainScreen extends StatelessWidget {
     return Consumer<MainScreenNotifier>(
         builder: (context, mainScreenNotifier, child) {
       return Scaffold(
-        // backgroundColor: const Color(0xFFE2E2E2),
-
         backgroundColor: Colors.grey.shade400,
         body: pageList[mainScreenNotifier.pageIndex],
         bottomNavigationBar: const BottomNavBar(),

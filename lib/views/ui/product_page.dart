@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/controllers/favorites_notifier.dart';
 import 'package:shop/controllers/product_notifier.dart';
+import 'package:shop/models/constants.dart';
 import 'package:shop/models/sneakers_model.dart';
 import 'package:shop/services/helper.dart';
-import 'package:shop/shared/appstyle.dart';
-import 'package:shop/shared/checkout_buttton.dart';
+import 'package:shop/views/shared/appstyle.dart';
+import 'package:shop/views/shared/checkout_buttton.dart';
+import 'package:shop/views/ui/favorites.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.id, required this.category});
@@ -22,6 +25,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   final PageController pageController = PageController();
   final _cartBox = Hive.box('cart_box');
+  final _favBox = Hive.box('fav_box');
 
   late Future<Sneakers> _sneaker;
 
@@ -37,6 +41,27 @@ class _ProductPageState extends State<ProductPage> {
 
   Future<void> _createCart(Map<String, dynamic> newCart) async {
     await _cartBox.add(newCart);
+  }
+  // final _favBox = Hive.box("fav_box");
+
+  Future<void> _createFav(Map<String, dynamic> addFav) async {
+    await _favBox.add(addFav);
+    getFavorites();
+  }
+
+  getFavorites() {
+    final favData = _favBox.keys.map((key) {
+      final item = _favBox.get(key);
+
+      return {
+        "key": key,
+        "id": item['id'],
+      };
+    }).toList();
+
+    favor = favData.toList();
+    ids = favor.map((item) => item['id']).toList();
+    setState(() {});
   }
 
   @override
@@ -121,13 +146,40 @@ class _ProductPageState extends State<ProductPage> {
                                         ),
                                       ),
                                       Positioned(
-                                        top: screenSize.height * 0.10,
-                                        right: 20,
-                                        child: Icon(
-                                          Icons.favorite,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
+                                          top: screenSize.height * 0.10,
+                                          right: 20,
+                                          child: Consumer<FavoritesNotifier>(
+                                            builder: (context,
+                                                favoritesNotifier, child) {
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  if (ids.contains(widget.id)) {
+                                                    // Handle removal from favorites
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const Favorites()));
+                                                  } else {
+                                                    // Handle adding to favorites
+                                                    _createFav({
+                                                      "id": sneaker.id,
+                                                      "name": sneaker.name,
+                                                      "category":
+                                                          sneaker.category,
+                                                      "price": sneaker.price,
+                                                      "imageUrl":
+                                                          sneaker.imageUrl[0],
+                                                    });
+                                                  }
+                                                },
+                                                child: ids.contains(sneaker.id)
+                                                    ? const Icon(Icons.favorite)
+                                                    : const Icon(
+                                                        Icons.favorite_outline),
+                                              );
+                                            },
+                                          )),
                                       Positioned(
                                         bottom: 0,
                                         right: 0,
@@ -183,10 +235,10 @@ class _ProductPageState extends State<ProductPage> {
                                                 FontWeight.bold),
                                           ),
                                         ),
-                                        SizedBox(height: 10),
                                         // --------------------- Ratings ROW ----------------------------//
                                         Row(
                                           children: [
+                                            SizedBox(height: 10),
                                             Text(
                                               sneaker.category,
                                               style: appStyle(20, Colors.black,
@@ -213,10 +265,10 @@ class _ProductPageState extends State<ProductPage> {
                                               ),
                                               onRatingUpdate: (rating) {},
                                             ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
                                           ],
-                                        ),
-                                        const SizedBox(
-                                          height: 12,
                                         ),
 
                                         // --------------------- PRICE ROW ----------------------------//
@@ -228,8 +280,7 @@ class _ProductPageState extends State<ProductPage> {
                                               "Rs ${sneaker.price}",
                                               style: appStyle(26, Colors.black,
                                                   FontWeight.w600),
-                                            ), // Text
-
+                                            ),
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   right: 8.0),
@@ -261,10 +312,10 @@ class _ProductPageState extends State<ProductPage> {
                                                 ],
                                               ),
                                             ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
                                           ],
-                                        ),
-                                        const SizedBox(
-                                          height: 12,
                                         ),
 
                                         // --------------------- Select Size ROW ----------------------------//
@@ -282,11 +333,12 @@ class _ProductPageState extends State<ProductPage> {
                                               style: appStyle(20, Colors.grey,
                                                   FontWeight.w600),
                                             ),
+                                             const SizedBox(
+                                              height: 12,
+                                            ),
                                           ],
                                         ),
-                                        const SizedBox(
-                                          height: 12,
-                                        ),
+                                       
 
                                         // ---------------------  Sizes List ROW ----------------------------//
 
@@ -318,10 +370,6 @@ class _ProductPageState extends State<ProductPage> {
                                                   disabledColor: Colors.white,
                                                   label: Text(
                                                     sizes['size'],
-                                                    // Text(
-                                                    //   productNotifier
-                                                    //           .shoesSizes[
-                                                    //       index]['size'],
                                                     style: appStyle(
                                                         18,
                                                         sizes['isSelected']
@@ -353,15 +401,15 @@ class _ProductPageState extends State<ProductPage> {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 10,
-                                        ), // SizedBox
+                                        // SizedBox(
+                                        //   height: 10,
+                                        // ), // SizedBox
 
-                                        const Divider(
-                                          indent: 10,
-                                          endIndent: 10,
-                                          color: Colors.black,
-                                        ),
+                                        // const Divider(
+                                        //   indent: 10,
+                                        //   endIndent: 10,
+                                        //   color: Colors.black,
+                                        // ),
 
                                         //-----------------------------------Details --------------------------------//
                                         const SizedBox(

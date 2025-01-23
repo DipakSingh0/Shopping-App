@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop/shared/appstyle.dart';
+import 'package:shop/views/shared/appstyle.dart';
 
 class CheckoutButtonWidget extends StatelessWidget {
   const CheckoutButtonWidget({

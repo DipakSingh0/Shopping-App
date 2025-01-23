@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/controllers/product_notifier.dart';
 import 'package:shop/models/sneakers_model.dart';
-import 'package:shop/ui/product_by_cat.dart';
+import 'package:shop/views/ui/product_by_cat.dart';
 import '../ui/product_page.dart';
 import 'appstyle.dart';
 import 'new_shoes.dart';

@@ -1,6 +1,9 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:shop/shared/appstyle.dart';
+import 'package:hive/hive.dart';
+import 'package:shop/models/constants.dart';
+import 'package:shop/views/shared/appstyle.dart';
+import 'package:shop/views/ui/favorites.dart';
 
 class ProductCart extends StatefulWidget {
   const ProductCart(
@@ -11,8 +14,7 @@ class ProductCart extends StatefulWidget {
       required this.id,
       required this.image,
       required this.ratings,
-      required this.reviews
-      });
+      required this.reviews});
 
   final String price;
   final String category;
@@ -27,6 +29,33 @@ class ProductCart extends StatefulWidget {
 }
 
 class _ProductCartState extends State<ProductCart> {
+  final _favBox = Hive.box("fav_box");
+
+  Future<void> _createFav(Map<String, dynamic> addFav) async {
+    await _favBox.add(addFav);
+    getFavorites();
+  }
+
+  getFavorites(){
+    final favData = _favBox.keys.map((key){
+
+      final item = _favBox.get(key);
+      return {
+        "key" :key , 
+        "id" : "id" , 
+      };
+    }
+    ).toList();
+
+    favor = favData.toList();
+    ids = favor.map((item) => item['id']).toList();
+    setState((){
+
+    });
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     bool selected = true;
@@ -54,8 +83,7 @@ class _ProductCartState extends State<ProductCart> {
                         height: MediaQuery.of(context).size.height * 0.23,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(widget
-                                .image),
+                            image: NetworkImage(widget.image),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -64,8 +92,24 @@ class _ProductCartState extends State<ProductCart> {
                           child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
-                            onTap: null,
-                            child: Icon(CommunityMaterialIcons.heart_outline)),
+                            onTap: () async {
+                            if( ids.contains(widget.id)){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Favorites()));
+                            } else {
+                              _createFav({
+                                'id': widget.id,
+                                'image': widget.image,
+                                'name' : widget.name , 
+                                'category' : widget.category,
+                                'price' : widget.price,
+                                'imageUrl' : widget.image
+                              });
+                            }
+                            },
+                            child: ids.contains(widget.id)? Icon(CommunityMaterialIcons.heart) : Icon(CommunityMaterialIcons.heart_outline)),
                       ))
                     ],
                   ),

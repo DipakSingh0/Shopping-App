@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shop/models/sneakers_model.dart';
 import 'package:shop/services/helper.dart';
-import 'package:shop/shared/appstyle.dart';
-import 'package:shop/shared/category_button.dart';
-import 'package:shop/shared/custom_spacer.dart';
-import 'package:shop/shared/latest_shoe.dart';
+import 'package:shop/views/shared/appstyle.dart';
+import 'package:shop/views/shared/category_button.dart';
+import 'package:shop/views/shared/custom_spacer.dart';
+import 'package:shop/views/shared/latest_shoe.dart';
 
 class ProductByCat extends StatefulWidget {
   const ProductByCat({super.key, required this.tabIndex});

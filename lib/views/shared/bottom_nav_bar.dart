@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/controllers/mainscreen_notifier.dart';
-import 'package:shop/shared/bottom_nav_widget.dart';
+import 'package:shop/views/shared/bottom_nav_widget.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -48,8 +48,8 @@ class BottomNavBar extends StatelessWidget {
                     mainScreenNotifier.pageIndex = 2;
                   },
                   icon: mainScreenNotifier.pageIndex == 2
-                      ? Icons.add_box
-                      : Icons.add_box_outlined,
+                      ? Icons.heart_broken_sharp
+                      : Icons.heart_broken_outlined,
                 ),
                 BottomNavWidget(
                   // icon: Icons.shopping_cart,

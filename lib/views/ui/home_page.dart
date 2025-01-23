@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop/models/sneakers_model.dart';
 import 'package:shop/services/helper.dart';
-import 'package:shop/shared/appstyle.dart';
-import 'package:shop/shared/home_widget.dart';
+import 'package:shop/views/shared/appstyle.dart';
+import 'package:shop/views/shared/home_widget.dart';
 // import 'package:shop/shared/new_shoes.dart';
 // import 'package:shop/shared/product_cart.dart';
 

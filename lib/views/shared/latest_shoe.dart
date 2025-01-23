@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shop/models/sneakers_model.dart';
-import 'package:shop/shared/stagger_tile.dart';
+import 'package:shop/views/shared/stagger_tile.dart';
 
 class LatestShoes extends StatelessWidget {
   const LatestShoes({

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:shop/controllers/favorites_notifier.dart';
 import 'package:shop/controllers/product_notifier.dart';
-import 'package:shop/ui/main_screen.dart';
+import 'package:shop/views/ui/main_screen.dart';
 import 'package:provider/provider.dart';
 import 'controllers/mainscreen_notifier.dart';
 
@@ -17,6 +18,8 @@ void main() async {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => MainScreenNotifier()),
     ChangeNotifierProvider(create: (context) => ProductNotifier()),
+    ChangeNotifierProvider(create: (context) => FavoritesNotifier()),
+
 
   ], child: const MyApp()));
 }
