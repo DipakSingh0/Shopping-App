@@ -63,6 +63,7 @@ class FavoritesState extends State<Favorites> {
           Padding(
             padding: const EdgeInsets.only(top: 100),
             child: ListView.builder(
+              itemCount: fav.length,
               itemBuilder: (BuildContext context, int index) {
                 final shoe = fav[index];
 
@@ -81,7 +82,7 @@ class FavoritesState extends State<Favorites> {
                             spreadRadius: 5,
                             blurRadius: 0.3,
                             offset:
-                                Offset(0, 1), // This is the highlighted part
+                                Offset(0, 1), 
                           ),
                         ],
                       ),
@@ -139,16 +140,20 @@ class FavoritesState extends State<Favorites> {
                                           child: GestureDetector(
                                               onTap: () {
                                                 _deleteFav(shoe['key']);
+                            //------this PRINT is for debugging purpose to know if it delets reqd shoe -------//
+                                                // print("delete id $shoe");
                                                 ids.removeWhere(
                                                   (element) => element == shoe['id']
                                                 );
-                                                Navigator.push(context , MaterialPageRoute(builder: (context) => MainScreen()));
+                                                Navigator.push(context , MaterialPageRoute(
+                                                  builder: (context) => MainScreen()));
                                               },
                                               child: Icon(Icons
-                                                  .favorite)),
+                                                  .favorite , color: Colors.red,)),
                                         ),
                                       ],
                                     ),
+                                  
                                   
                                   ],
                                 ),

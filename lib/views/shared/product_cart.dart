@@ -42,7 +42,7 @@ class _ProductCartState extends State<ProductCart> {
       final item = _favBox.get(key);
       return {
         "key" :key , 
-        "id" : "id" , 
+        "id" : item['id'] , 
       };
     }
     ).toList();

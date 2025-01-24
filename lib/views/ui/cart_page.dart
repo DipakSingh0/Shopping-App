@@ -123,77 +123,39 @@ class CartPage extends StatelessWidget {
 
                                           //--------title and category column------------------------//
 
+                                       
                                           Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 12, left: 20)),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                data['name'],
-                                                style: appStyle(
-                                                    20,
-                                                    Colors.black,
-                                                    FontWeight.bold),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                data['category'],
-                                                style: appStyle(16, Colors.grey,
-                                                    FontWeight.w600),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-
-                                              //--------- price row------------------------//
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    data['price'],
-                                                    style: appStyle(
-                                                        18,
-                                                        Colors.black,
-                                                        FontWeight.w600),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(
-                                                    "${data['sizes']}",
-                                                    style: appStyle(
-                                                        18,
-                                                        Colors.black,
-                                                        FontWeight.w600),
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 40,
-                                                  ),
-                                                  Text(
-                                                    "Size",
-                                                    style: appStyle(
-                                                        18,
-                                                        Colors.black,
-                                                        FontWeight.w600),
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 15,
-                                                  ),
-                                                  Text(
-                                                    "${data['sizes']}",
-                                                    style: appStyle(
-                                                        18,
-                                                        Colors.black,
-                                                        FontWeight.w600),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                             padding: EdgeInsets.only(
+                                                  top: 12, left: 20),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  data['name'],
+                                                  style: appStyle(
+                                                      20,
+                                                      Colors.black,
+                                                      FontWeight.bold),
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  data['category'],
+                                                  style: appStyle(16, Colors.grey,
+                                                      FontWeight.w600),
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                            
+                                                //--------- price row------------------------//
+                                                PriceRow(data: data),
+                                              ],
+                                            ),
                                           )
                                         ],
                                       ),
@@ -247,7 +209,8 @@ class CartPage extends StatelessWidget {
                                             ),
                                           ),
                                         ],
-                                      )
+                                      ),
+
                                     ],
                                   ),
                                 )),
@@ -263,6 +226,60 @@ class CartPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class PriceRow extends StatelessWidget {
+  const PriceRow({
+    super.key,
+    required this.data,
+  });
+
+  final dynamic data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          data['price'],
+          style: appStyle(
+              18,
+              Colors.black,
+              FontWeight.w600),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Text(
+          "${data['sizes']}",
+          style: appStyle(
+              18,
+              Colors.black,
+              FontWeight.w600),
+        ),
+        const SizedBox(
+          width: 40,
+        ),
+        Text(
+          "Size",
+          style: appStyle(
+              18,
+              Colors.black,
+              FontWeight.w600),
+        ),
+        const SizedBox(
+          width: 15,
+        ),
+        Text(
+          "${data['sizes']}",
+          style: appStyle(
+              18,
+              Colors.black,
+              FontWeight.w600),
+        ),
+      ],
     );
   }
 }

@@ -25,7 +25,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   final PageController pageController = PageController();
   final _cartBox = Hive.box('cart_box');
-  final _favBox = Hive.box('fav_box');
+  // final _favBox = Hive.box('fav_box');
 
   late Future<Sneakers> _sneaker;
 
@@ -42,11 +42,21 @@ class _ProductPageState extends State<ProductPage> {
   Future<void> _createCart(Map<String, dynamic> newCart) async {
     await _cartBox.add(newCart);
   }
-  // final _favBox = Hive.box("fav_box");
+
+  final _favBox = Hive.box("fav_box");
 
   Future<void> _createFav(Map<String, dynamic> addFav) async {
     await _favBox.add(addFav);
     getFavorites();
+  }
+
+    Future<void> _deleteFav(String favId) async {
+    final favItem = _favBox.values
+        .firstWhere((item) => item['id'] == favId, orElse: () => null);
+    if (favItem != null) {
+      await _favBox.delete(favItem['key']);
+      getFavorites();
+    }
   }
 
   getFavorites() {
@@ -153,8 +163,13 @@ class _ProductPageState extends State<ProductPage> {
                                                 favoritesNotifier, child) {
                                               return GestureDetector(
                                                 onTap: () {
-                                                  if (ids.contains(widget.id)) {
+                                                  if (ids.contains(sneaker.id)) {
+
+
                                                     // Handle removal from favorites
+                                                    _deleteFav(sneaker.id);
+
+
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
@@ -174,9 +189,12 @@ class _ProductPageState extends State<ProductPage> {
                                                   }
                                                 },
                                                 child: ids.contains(sneaker.id)
-                                                    ? const Icon(Icons.favorite)
+                                                    ? const Icon(Icons.favorite,
+                                                        color: Colors.red)
                                                     : const Icon(
-                                                        Icons.favorite_outline),
+                                                        Icons.favorite_outline,
+                                                        color: Colors.red,
+                                                      ),
                                               );
                                             },
                                           )),
@@ -272,73 +290,11 @@ class _ProductPageState extends State<ProductPage> {
                                         ),
 
                                         // --------------------- PRICE ROW ----------------------------//
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Rs ${sneaker.price}",
-                                              style: appStyle(26, Colors.black,
-                                                  FontWeight.w600),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "Color :",
-                                                    style: appStyle(
-                                                        18,
-                                                        Colors.black,
-                                                        FontWeight.w500),
-                                                  ), // Text
-                                                  const SizedBox(width: 8),
-                                                  const CircleAvatar(
-                                                    radius: 7,
-                                                    backgroundColor:
-                                                        Colors.black,
-                                                  ),
-                                                  const SizedBox(width: 5),
-
-                                                  const CircleAvatar(
-                                                    radius: 7,
-                                                    backgroundColor:
-                                                        Colors.black,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 12,
-                                            ),
-                                          ],
-                                        ),
+                                        PriceRow(sneaker: sneaker),
 
                                         // --------------------- Select Size ROW ----------------------------//
 
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "Select Sizes",
-                                              style: appStyle(20, Colors.black,
-                                                  FontWeight.w600),
-                                            ),
-                                            const SizedBox(width: 30),
-                                            Text(
-                                              "View size guide",
-                                              style: appStyle(20, Colors.grey,
-                                                  FontWeight.w600),
-                                            ),
-                                             const SizedBox(
-                                              height: 12,
-                                            ),
-                                          ],
-                                        ),
-                                       
+                                        SelectSizeRow(),
 
                                         // ---------------------  Sizes List ROW ----------------------------//
 
@@ -477,5 +433,79 @@ class _ProductPageState extends State<ProductPage> {
                 });
               }
             }));
+  }
+}
+
+class SelectSizeRow extends StatelessWidget {
+  const SelectSizeRow({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          "Select Sizes",
+          style: appStyle(20, Colors.black, FontWeight.w600),
+        ),
+        const SizedBox(width: 30),
+        Text(
+          "View size guide",
+          style: appStyle(20, Colors.grey, FontWeight.w600),
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+      ],
+    );
+  }
+}
+
+class PriceRow extends StatelessWidget {
+  const PriceRow({
+    super.key,
+    required this.sneaker,
+  });
+
+  final Sneakers? sneaker;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          "Rs ${sneaker?.price}",
+          style: appStyle(26, Colors.black, FontWeight.w600),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Color :",
+                style: appStyle(18, Colors.black, FontWeight.w500),
+              ), // Text
+              const SizedBox(width: 8),
+              const CircleAvatar(
+                radius: 7,
+                backgroundColor: Colors.black,
+              ),
+              const SizedBox(width: 5),
+
+              const CircleAvatar(
+                radius: 7,
+                backgroundColor: Colors.black,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+      ],
+    );
   }
 }
