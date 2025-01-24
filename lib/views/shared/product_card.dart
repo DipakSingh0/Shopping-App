@@ -1,12 +1,12 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:shop/models/constants.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/controllers/favorites_notifier.dart';
 import 'package:shop/views/shared/appstyle.dart';
 import 'package:shop/views/ui/favorites.dart';
 
-class ProductCart extends StatefulWidget {
-  const ProductCart(
+class ProductCard extends StatefulWidget {
+  const ProductCard(
       {super.key,
       required this.price,
       required this.category,
@@ -25,39 +25,41 @@ class ProductCart extends StatefulWidget {
   final double ratings;
 
   @override
-  State<ProductCart> createState() => _ProductCartState();
+  State<ProductCard> createState() => _ProductCardState();
 }
 
-class _ProductCartState extends State<ProductCart> {
-  final _favBox = Hive.box("fav_box");
+class _ProductCardState extends State<ProductCard> {
+  // final _favBox = Hive.box("fav_box");
 
-  Future<void> _createFav(Map<String, dynamic> addFav) async {
-    await _favBox.add(addFav);
-    getFavorites();
-  }
+  // Future<void> _createFav(Map<String, dynamic> addFav) async {
+  //   await _favBox.add(addFav);
+  //   getFavorites();
+  // }
 
-  getFavorites(){
-    final favData = _favBox.keys.map((key){
+  // getFavorites(){
+  //   final favData = _favBox.keys.map((key){
 
-      final item = _favBox.get(key);
-      return {
-        "key" :key , 
-        "id" : item['id'] , 
-      };
-    }
-    ).toList();
+  //     final item = _favBox.get(key);
+  //     return {
+  //       "key" :key , 
+  //       "id" : item['id'] , 
+  //     };
+  //   }
+  //   ).toList();
 
-    favor = favData.toList();
-    ids = favor.map((item) => item['id']).toList();
-    setState((){
+  //   favor = favData.toList();
+  //   ids = favor.map((item) => item['id']).toList();
+  //   setState((){
 
-    });
+  //   });
 
-  }
+  // }
 
 
   @override
   Widget build(BuildContext context) {
+    var favoritesNotifier = Provider.of<FavoritesNotifier>(context , listen:true);
+    favoritesNotifier.getFavorites();
     bool selected = true;
     return Padding(
         padding: EdgeInsets.fromLTRB(8, 0, 20, 0),
@@ -93,13 +95,13 @@ class _ProductCartState extends State<ProductCart> {
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
                             onTap: () async {
-                            if( ids.contains(widget.id)){
+                            if(favoritesNotifier.ids.contains(widget.id)){
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Favorites()));
                             } else {
-                              _createFav({
+                              favoritesNotifier.createFav({
                                 'id': widget.id,
                                 'image': widget.image,
                                 'name' : widget.name , 
@@ -108,8 +110,9 @@ class _ProductCartState extends State<ProductCart> {
                                 'imageUrl' : widget.image
                               });
                             }
+                             setState(() {});
                             },
-                            child: ids.contains(widget.id)? Icon(CommunityMaterialIcons.heart) : Icon(CommunityMaterialIcons.heart_outline)),
+                            child:favoritesNotifier.ids.contains(widget.id)? Icon(CommunityMaterialIcons.heart) : Icon(CommunityMaterialIcons.heart_outline)),
                       ))
                     ],
                   ),

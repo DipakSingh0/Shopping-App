@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:shop/models/constants.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/controllers/favorites_notifier.dart';
 import 'package:shop/views/shared/appstyle.dart';
 import 'package:shop/views/ui/main_screen.dart';
 
@@ -13,28 +13,31 @@ class Favorites extends StatefulWidget {
 }
 
 class FavoritesState extends State<Favorites> {
-  final _favBox = Hive.box('fav_box');
+  // final _favBox = Hive.box('fav_box');
 
-  _deleteFav(int key) async {
-    await _favBox.delete(key);
-  }
+  // _deleteFav(int key) async {
+  //   await _favBox.delete(key);
+  // }
 
   @override
   Widget build(BuildContext context) {
-    List<dynamic> fav = [];
-    final favData = _favBox.keys.map((key) {
-      final item = _favBox.get(key);
-      return {
-        "key": key,
-        "id": item['id'],
-        "category": item['category'],
-        "name": item['name'],
-        "price": item['price'],
-        "imageUrl": item['imageUrl'],
-      };
-    }).toList();
+    // List<dynamic> fav = [];
+    // final favData = _favBox.keys.map((key) {
+    //   final item = _favBox.get(key);
+    //   return {
+    //     "key": key,
+    //     "id": item['id'],
+    //     "category": item['category'],
+    //     "name": item['name'],
+    //     "price": item['price'],
+    //     "imageUrl": item['imageUrl'],
+    //   };
+    // }).toList();
 
-    fav = favData.reversed.toList();
+    // fav = favData.reversed.toList();
+
+    var favoritesNotifier = Provider.of<FavoritesNotifier>(context ,);
+    favoritesNotifier.getAllData();
 
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
@@ -63,9 +66,9 @@ class FavoritesState extends State<Favorites> {
           Padding(
             padding: const EdgeInsets.only(top: 100),
             child: ListView.builder(
-              itemCount: fav.length,
+              itemCount:favoritesNotifier.fav.length,
               itemBuilder: (BuildContext context, int index) {
-                final shoe = fav[index];
+                final shoe = favoritesNotifier.fav[index];
 
                 return Padding(
                   padding: EdgeInsets.all(8),
@@ -125,40 +128,54 @@ class FavoritesState extends State<Favorites> {
                                     SizedBox(
                                       height: 5,
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "${shoe['price']}",
-                                          style: appStyle(
-                                              18, Colors.black, FontWeight.w600),
-                                        ),
-                                        // const SizedBox(width:120 ,),
-                                          Padding(
-                                          padding: EdgeInsets.all(8),
-                                          child: GestureDetector(
-                                              onTap: () {
-                                                _deleteFav(shoe['key']);
-                            //------this PRINT is for debugging purpose to know if it delets reqd shoe -------//
-                                                // print("delete id $shoe");
-                                                ids.removeWhere(
-                                                  (element) => element == shoe['id']
-                                                );
-                                                Navigator.push(context , MaterialPageRoute(
-                                                  builder: (context) => MainScreen()));
-                                              },
-                                              child: Icon(Icons
-                                                  .favorite , color: Colors.red,)),
-                                        ),
-                                      ],
+                                    Text(
+                                      "${shoe['price']}",
+                                      style: appStyle(
+                                          18, Colors.black, FontWeight.w600),
                                     ),
+                                    // const SizedBox(width:120 ,),
+                                    //   Padding(
+                                    //   padding: EdgeInsets.all(8),
+                                    //   child: GestureDetector(
+                                    //       onTap: () {
+                                    //         _deleteFav(shoe['key']);
+                                    //                             //------this PRINT is for debugging purpose to know if it delets reqd shoe -------//
+                                    //         // print("delete id $shoe");
+                                    //         ids.removeWhere(
+                                    //           (element) => element == shoe['id']
+                                    //         );
+                                    //         Navigator.push(context , MaterialPageRoute(
+                                    //           builder: (context) => MainScreen()));
+                                    //       },
+                                    //       child: Icon(Icons
+                                    //           .favorite , size: 35 ,color: Colors.red,)),
+                                    // ),
                                   
                                   
                                   ],
                                 ),
                               )
                             ],
+                          ),
+                               Padding(
+                            padding: EdgeInsets.all(8),
+                            child: GestureDetector(
+                                onTap: () {
+                                  favoritesNotifier.deleteFav(shoe['key']);
+                                  //------this PRINT is for debugging purpose to know if it delets reqd shoe -------//
+                                  // print("delete id $shoe");
+                                  favoritesNotifier.ids.removeWhere(
+                                      (element) => element == shoe['id']);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MainScreen()));
+                                },
+                                child: Icon(
+                                  Icons.favorite,
+                                  size: 35,
+                                  color: Colors.red,
+                                )),
                           ),
                         ],
                       ),

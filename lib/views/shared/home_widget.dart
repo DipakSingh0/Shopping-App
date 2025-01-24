@@ -8,7 +8,7 @@ import 'package:shop/views/ui/product_by_cat.dart';
 import '../ui/product_page.dart';
 import 'appstyle.dart';
 import 'new_shoes.dart';
-import 'product_cart.dart';
+import 'product_card.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({
@@ -58,7 +58,7 @@ class HomeWidget extends StatelessWidget {
                             ProductPage(id: shoe.id , category : shoe.category)
                             ));
                           },
-                          child: ProductCart(
+                          child: ProductCard(
                             price: "Rs.${shoe.price}",
                             category: shoe.category,
                             name: shoe.name,
