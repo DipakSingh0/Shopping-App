@@ -1,34 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/controllers/cart_provider.dart';
 import 'package:shop/views/shared/appstyle.dart';
 import 'package:shop/views/shared/checkout_buttton.dart';
 
-class CartPage extends StatelessWidget {
-  CartPage({super.key});
-
-  final _cartBox = Hive.box('cart_box');
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
 
   @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  @override
   Widget build(BuildContext context) {
-    List<dynamic> cart = [];
-
-    final cartData = _cartBox.keys.map((key) {
-      final item = _cartBox.get(key);
-      return {
-        "key": key,
-        "id": item['id'],
-        "category": item['category'],
-        "name": item['name'],
-        "imageUrl": item['imageUrl'],
-        "price": item['price'],
-        "qty": item['qty'],
-        "sizes": item['sizes'],
-      };
-    }).toList();
-
-    cart = cartData.reversed.toList();
+    var cartProvider = Provider.of<CartProvider>(context);
+    cartProvider.getCart();
 
     return Scaffold(
       backgroundColor: Colors.grey.shade400,
@@ -61,10 +50,10 @@ class CartPage extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.65,
                   child: ListView.builder(
-                      itemCount: cart.length,
+                      itemCount: cartProvider.cart.length,
                       padding: EdgeInsets.zero,
                       itemBuilder: (context, index) {
-                        final data = cart[index];
+                        final data = cartProvider.cart[index];
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ClipRRect(
@@ -76,7 +65,10 @@ class CartPage extends StatelessWidget {
                                   children: [
                                     SlidableAction(
                                       flex: 1,
-                                      onPressed: null,
+                                      onPressed: (context) {
+                                        cartProvider.deleteCart(data['key']);
+                                      },
+                                      // onPressed: null,
                                       backgroundColor: const Color(0xFF000000),
                                       foregroundColor: Colors.white,
                                       icon: Icons.delete,
@@ -111,7 +103,7 @@ class CartPage extends StatelessWidget {
                                             padding: const EdgeInsets.all(8.0),
                                             child: ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                                  BorderRadius.circular(12),
                                               child: CachedNetworkImage(
                                                 imageUrl: data['imageUrl'],
                                                 width: 70,
@@ -123,10 +115,9 @@ class CartPage extends StatelessWidget {
 
                                           //--------title and category column------------------------//
 
-                                       
                                           Padding(
-                                             padding: EdgeInsets.only(
-                                                  top: 12, left: 20),
+                                            padding: EdgeInsets.only(
+                                                top: 10, left: 20),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -141,17 +132,19 @@ class CartPage extends StatelessWidget {
                                                       FontWeight.bold),
                                                 ),
                                                 const SizedBox(
-                                                  height: 5,
+                                                  height: 4,
                                                 ),
                                                 Text(
                                                   data['category'],
-                                                  style: appStyle(16, Colors.grey,
+                                                  style: appStyle(
+                                                      16,
+                                                      Colors.grey,
                                                       FontWeight.w600),
                                                 ),
                                                 const SizedBox(
                                                   height: 5,
                                                 ),
-                                            
+
                                                 //--------- price row------------------------//
                                                 PriceRow(data: data),
                                               ],
@@ -179,7 +172,8 @@ class CartPage extends StatelessWidget {
                                                 children: [
                                                   InkWell(
                                                     onTap: () {
-                                                      // cartProvider.increment();
+                                                      cartProvider.increment();
+                                                      // print(data['qty']);
                                                     },
                                                     child: const Icon(
                                                       Icons.remove,
@@ -199,7 +193,9 @@ class CartPage extends StatelessWidget {
 
                                                   InkWell(
                                                       onTap: () {
-                                                        // cartProvider.decrement();
+                                                        cartProvider
+                                                            .decrement();
+                                                        // print(data['qty']);
                                                       },
                                                       child: const Icon(
                                                         Icons.add,
@@ -210,7 +206,6 @@ class CartPage extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-
                                     ],
                                   ),
                                 )),
@@ -244,40 +239,28 @@ class PriceRow extends StatelessWidget {
       children: [
         Text(
           data['price'],
-          style: appStyle(
-              18,
-              Colors.black,
-              FontWeight.w600),
+          style: appStyle(18, Colors.black, FontWeight.w600),
         ),
         const SizedBox(
           height: 5,
         ),
         Text(
           "${data['sizes']}",
-          style: appStyle(
-              18,
-              Colors.black,
-              FontWeight.w600),
+          style: appStyle(18, Colors.black, FontWeight.w600),
         ),
         const SizedBox(
           width: 40,
         ),
         Text(
           "Size",
-          style: appStyle(
-              18,
-              Colors.black,
-              FontWeight.w600),
+          style: appStyle(18, Colors.black, FontWeight.w600),
         ),
         const SizedBox(
           width: 15,
         ),
         Text(
           "${data['sizes']}",
-          style: appStyle(
-              18,
-              Colors.black,
-              FontWeight.w600),
+          style: appStyle(18, Colors.black, FontWeight.w600),
         ),
       ],
     );

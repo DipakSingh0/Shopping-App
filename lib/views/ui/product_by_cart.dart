@@ -1,48 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:shop/models/sneakers_model.dart';
-import 'package:shop/services/helper.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/controllers/product_notifier.dart';
 import 'package:shop/views/shared/appstyle.dart';
 import 'package:shop/views/shared/category_button.dart';
 import 'package:shop/views/shared/custom_spacer.dart';
 import 'package:shop/views/shared/latest_shoe.dart';
 
-class ProductByCat extends StatefulWidget {
-  const ProductByCat({super.key, required this.tabIndex});
+class ProductByCart extends StatefulWidget {
+  const ProductByCart({super.key, required this.tabIndex});
 
   final int tabIndex;
 
   @override
-  State<ProductByCat> createState() => _ProductByCatState();
+  State<ProductByCart> createState() => _ProductByCartState();
 }
 
-class _ProductByCatState extends State<ProductByCat>
+class _ProductByCartState extends State<ProductByCart>
     with TickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 3, vsync: this);
 
-  late Future<List<Sneakers>> _male;
-  late Future<List<Sneakers>> _female;
-  late Future<List<Sneakers>> _kids;
-
-  void getMale() {
-    _male = Helper().getMaleSneakers();
-  }
-
-  void getFemale() {
-    _female = Helper().getFemaleSneakers();
-  }
-
-  void getKids() {
-    _kids = Helper().getKidsSneakers();
-  }
-
   @override
   void initState() {
     super.initState();
-    getMale();
-    getFemale();
-    getKids();
   }
 
   List<String> brand = [
@@ -54,6 +35,11 @@ class _ProductByCatState extends State<ProductByCat>
 
   @override
   Widget build(BuildContext context) {
+    var productNotifier = Provider.of<ProductNotifier>(context);
+    productNotifier.getFemale();
+    productNotifier.getMale();
+    productNotifier.getKids();
+
     var screenSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -117,9 +103,9 @@ class _ProductByCatState extends State<ProductByCat>
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(16)),
                   child: TabBarView(controller: _tabController, children: [
-                    LatestShoes(male: _male),
-                    LatestShoes(male: _female),
-                    LatestShoes(male: _kids),
+                    LatestShoes(male: productNotifier.male),
+                    LatestShoes(male: productNotifier.female),
+                    LatestShoes(male: productNotifier.kids),
                   ]),
                 ),
               )
@@ -238,35 +224,7 @@ class _ProductByCatState extends State<ProductByCat>
                       ],
                     ),
                   )
-                ]
-                    //           Container(
-                    //             padding: EdgeInsets.all(8),
-                    //             height: 8,
-                    //             child: ListView.builder(
-                    //                 itemCount: 4,
-                    //                 scrollDirection: Axis.horizontal,
-                    //                 itemBuilder: (context, index) {
-                    //                   return Padding(
-                    //                     padding: EdgeInsets.all(8),
-                    //                     child: Container(
-                    //                       decoration: BoxDecoration(
-                    //                         color: Colors.grey.shade200,
-                    //                         borderRadius: BorderRadius.all(
-                    //                           Radius.circular(12),
-                    //                         ),
-                    //                       ),
-                    //                       child: Image.asset(
-                    //                         brand[index],
-                    //                         height: 60,
-                    //                         width: 80,
-                    //                         color: Colors.black,
-                    //                       ),
-                    //                     ),
-                    //                   );
-                    //                 }),
-                    //           )
-                    //         ],
-                    ),
+                ]),
               ),
             ],
           )),

@@ -29,36 +29,10 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  // final _favBox = Hive.box("fav_box");
-
-  // Future<void> _createFav(Map<String, dynamic> addFav) async {
-  //   await _favBox.add(addFav);
-  //   getFavorites();
-  // }
-
-  // getFavorites(){
-  //   final favData = _favBox.keys.map((key){
-
-  //     final item = _favBox.get(key);
-  //     return {
-  //       "key" :key , 
-  //       "id" : item['id'] , 
-  //     };
-  //   }
-  //   ).toList();
-
-  //   favor = favData.toList();
-  //   ids = favor.map((item) => item['id']).toList();
-  //   setState((){
-
-  //   });
-
-  // }
-
-
   @override
   Widget build(BuildContext context) {
-    var favoritesNotifier = Provider.of<FavoritesNotifier>(context , listen:true);
+    var favoritesNotifier =
+        Provider.of<FavoritesNotifier>(context, listen: true);
     favoritesNotifier.getFavorites();
     bool selected = true;
     return Padding(
@@ -95,24 +69,26 @@ class _ProductCardState extends State<ProductCard> {
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
                             onTap: () async {
-                            if(favoritesNotifier.ids.contains(widget.id)){
+                              if (favoritesNotifier.ids.contains(widget.id)) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Favorites()));
-                            } else {
-                              favoritesNotifier.createFav({
-                                'id': widget.id,
-                                'image': widget.image,
-                                'name' : widget.name , 
-                                'category' : widget.category,
-                                'price' : widget.price,
-                                'imageUrl' : widget.image
-                              });
-                            }
-                             setState(() {});
+                              } else {
+                                favoritesNotifier.createFav({
+                                  'id': widget.id,
+                                  'image': widget.image,
+                                  'name': widget.name,
+                                  'category': widget.category,
+                                  'price': widget.price,
+                                  'imageUrl': widget.image
+                                });
+                              }
+                              setState(() {});
                             },
-                            child:favoritesNotifier.ids.contains(widget.id)? Icon(CommunityMaterialIcons.heart) : Icon(CommunityMaterialIcons.heart_outline)),
+                            child: favoritesNotifier.ids.contains(widget.id)
+                                ? Icon(CommunityMaterialIcons.heart)
+                                : Icon(CommunityMaterialIcons.heart_outline)),
                       ))
                     ],
                   ),
@@ -198,51 +174,3 @@ class _ProductCardState extends State<ProductCard> {
                 ]))));
   }
 }
-
-// class RatingsRowWidget extends StatelessWidget {
-//   const RatingsRowWidget({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: [
-//         Row(
-//           children: [
-//             Padding(
-//               padding: const EdgeInsets.only(left:12.0),
-//               child: Icon(
-//                 Icons.star,
-//                 color: Colors.amber,
-//                 size: 18,
-//               ),
-//             ),
-//             SizedBox(width: 4),
-//             Text(
-//                widget.ratings.toString(),
-//               // "4.5",
-//               style: TextStyle(
-//                 fontWeight: FontWeight.bold,
-//                 fontSize: 16,
-//               ),
-//             ),
-//           ],
-//         ),
-//         Expanded(
-//           child: Center(
-//             child: Text(
-//               widget.reviews.toString(),
-//               // "123 reviews",
-//               style: TextStyle(
-//                 color: Colors.grey[600],
-//                 fontSize: 14,
-//               ),
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shop/models/sneakers_model.dart';
@@ -17,9 +16,11 @@ class LatestShoes extends StatelessWidget {
     return FutureBuilder<List<Sneakers>>(
         future: _male,
         builder: (context, snapshot) {
-          if (snapshot.connectionState ==
-              ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: CircularProgressIndicator()));
           } else if (snapshot.hasError) {
             return Text("Error ${snapshot.error}");
           } else {

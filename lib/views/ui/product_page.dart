@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/controllers/favorites_notifier.dart';
 import 'package:shop/controllers/product_notifier.dart';
 import 'package:shop/models/sneakers_model.dart';
-import 'package:shop/services/helper.dart';
 import 'package:shop/views/shared/appstyle.dart';
 import 'package:shop/views/shared/checkout_buttton.dart';
 import 'package:shop/views/ui/favorites.dart';
@@ -23,70 +21,19 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   final PageController pageController = PageController();
-  final _cartBox = Hive.box('cart_box');
-  // final _favBox = Hive.box('fav_box');
-
-  late Future<Sneakers> _sneaker;
-
-  void getShoes() {
-    if (widget.category == "Men's Shoes") {
-      _sneaker = Helper().getMaleSneakersById(widget.id);
-    } else if (widget.category == "Women's Running") {
-      _sneaker = Helper().getfemaleSneakersById(widget.id);
-    } else {
-      _sneaker = Helper().getKidsSneakersById(widget.id);
-    }
-  }
-
-  Future<void> _createCart(Map<String, dynamic> newCart) async {
-    await _cartBox.add(newCart);
-  }
-
-  // final _favBox = Hive.box("fav_box");
-
-  // Future<void> _createFav(Map<String, dynamic> addFav) async {
-  //   await _favBox.add(addFav);
-  //   // getFavorites();
-  // }
-
-  //   Future<void> _deleteFav(String favId) async {
-  //   final favItem = _favBox.values
-  //       .firstWhere((item) => item['id'] == favId, orElse: () => null);
-  //   if (favItem != null) {
-  //     await _favBox.delete(favItem['key']);
-  //     // getFavorites();
-  //   }
-  // }
-
-  // getFavorites() {
-  //   final favData = _favBox.keys.map((key) {
-  //     final item = _favBox.get(key);
-
-  //     return {
-  //       "key": key,
-  //       "id": item['id'],
-  //     };
-  //   }).toList();
-
-  //   favor = favData.toList();
-  //   ids = favor.map((item) => item['id']).toList();
-  //   setState(() {});
-  // }
-
-  @override
-  void initState() {
-    super.initState();
-    getShoes();
-  }
 
   @override
   Widget build(BuildContext context) {
-    var favoritesNotifier = Provider.of<FavoritesNotifier>(context , listen: true);
+    var productNotifier = Provider.of<ProductNotifier>(context);
+    productNotifier.getShoes(widget.category, widget.id);
+
+    var favoritesNotifier =
+        Provider.of<FavoritesNotifier>(context, listen: true);
     favoritesNotifier.getFavorites();
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
         body: FutureBuilder<Sneakers>(
-            future: _sneaker,
+            future: productNotifier.sneaker,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
@@ -164,12 +111,10 @@ class _ProductPageState extends State<ProductPage> {
                                                 favoritesNotifier, child) {
                                               return GestureDetector(
                                                 onTap: () async {
-                                                  if (favoritesNotifier.ids.contains(widget.id)) {
-
-
+                                                  if (favoritesNotifier.ids
+                                                      .contains(widget.id)) {
                                                     // Handle removal from favorites
                                                     // _deleteFav(widget.id);
-
 
                                                     Navigator.push(
                                                         context,
@@ -178,7 +123,8 @@ class _ProductPageState extends State<ProductPage> {
                                                                 const Favorites()));
                                                   } else {
                                                     // Handle adding to favorites
-                                                    favoritesNotifier.createFav({
+                                                    favoritesNotifier
+                                                        .createFav({
                                                       "id": sneaker.id,
                                                       "name": sneaker.name,
                                                       "category":
@@ -188,15 +134,16 @@ class _ProductPageState extends State<ProductPage> {
                                                           sneaker.imageUrl[0],
                                                     });
                                                   }
-                                                  setState(() {
-                                                    
-                                                  });
+                                                  setState(() {});
                                                 },
-                                                child: favoritesNotifier.ids.contains(sneaker.id)
-                                                    ? const Icon(Icons.favorite, size: 35,
+                                                child: favoritesNotifier.ids
+                                                        .contains(sneaker.id)
+                                                    ? const Icon(Icons.favorite,
+                                                        size: 35,
                                                         color: Colors.red)
                                                     : const Icon(
-                                                        Icons.favorite_outline,  size: 35,
+                                                        Icons.favorite_outline,
+                                                        size: 35,
                                                         color: Colors.red,
                                                       ),
                                               );
@@ -405,7 +352,7 @@ class _ProductPageState extends State<ProductPage> {
                                                 const EdgeInsets.only(top: 8),
                                             child: CheckoutButtonWidget(
                                               onTap: () async {
-                                                _createCart({
+                                                productNotifier.createCart({
                                                   "id": sneaker.id,
                                                   "name": sneaker.name,
                                                   "category": sneaker.category,

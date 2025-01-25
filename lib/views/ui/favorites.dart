@@ -13,30 +13,11 @@ class Favorites extends StatefulWidget {
 }
 
 class FavoritesState extends State<Favorites> {
-  // final _favBox = Hive.box('fav_box');
-
-  // _deleteFav(int key) async {
-  //   await _favBox.delete(key);
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // List<dynamic> fav = [];
-    // final favData = _favBox.keys.map((key) {
-    //   final item = _favBox.get(key);
-    //   return {
-    //     "key": key,
-    //     "id": item['id'],
-    //     "category": item['category'],
-    //     "name": item['name'],
-    //     "price": item['price'],
-    //     "imageUrl": item['imageUrl'],
-    //   };
-    // }).toList();
-
-    // fav = favData.reversed.toList();
-
-    var favoritesNotifier = Provider.of<FavoritesNotifier>(context ,);
+    var favoritesNotifier = Provider.of<FavoritesNotifier>(
+      context,
+    );
     favoritesNotifier.getAllData();
 
     var screenSize = MediaQuery.of(context).size;
@@ -66,7 +47,7 @@ class FavoritesState extends State<Favorites> {
           Padding(
             padding: const EdgeInsets.only(top: 100),
             child: ListView.builder(
-              itemCount:favoritesNotifier.fav.length,
+              itemCount: favoritesNotifier.fav.length,
               itemBuilder: (BuildContext context, int index) {
                 final shoe = favoritesNotifier.fav[index];
 
@@ -84,8 +65,7 @@ class FavoritesState extends State<Favorites> {
                             color: Colors.grey.shade500,
                             spreadRadius: 5,
                             blurRadius: 0.3,
-                            offset:
-                                Offset(0, 1), 
+                            offset: Offset(0, 1),
                           ),
                         ],
                       ),
@@ -106,7 +86,6 @@ class FavoritesState extends State<Favorites> {
                                   ),
                                 ),
                               ),
-                              
                               Padding(
                                 padding: EdgeInsets.only(top: 12, left: 20),
                                 child: Column(
@@ -133,31 +112,12 @@ class FavoritesState extends State<Favorites> {
                                       style: appStyle(
                                           18, Colors.black, FontWeight.w600),
                                     ),
-                                    // const SizedBox(width:120 ,),
-                                    //   Padding(
-                                    //   padding: EdgeInsets.all(8),
-                                    //   child: GestureDetector(
-                                    //       onTap: () {
-                                    //         _deleteFav(shoe['key']);
-                                    //                             //------this PRINT is for debugging purpose to know if it delets reqd shoe -------//
-                                    //         // print("delete id $shoe");
-                                    //         ids.removeWhere(
-                                    //           (element) => element == shoe['id']
-                                    //         );
-                                    //         Navigator.push(context , MaterialPageRoute(
-                                    //           builder: (context) => MainScreen()));
-                                    //       },
-                                    //       child: Icon(Icons
-                                    //           .favorite , size: 35 ,color: Colors.red,)),
-                                    // ),
-                                  
-                                  
                                   ],
                                 ),
                               )
                             ],
                           ),
-                               Padding(
+                          Padding(
                             padding: EdgeInsets.all(8),
                             child: GestureDetector(
                                 onTap: () {

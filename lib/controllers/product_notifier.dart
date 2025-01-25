@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:shop/models/sneakers_model.dart';
+import 'package:shop/services/helper.dart';
 
 class ProductNotifier extends ChangeNotifier {
   int _activePage = 0;
@@ -28,8 +31,45 @@ class ProductNotifier extends ChangeNotifier {
   }
 
   List<String> get sizes => _sizes;
-  set sizes(List<String> newSizes){
+  set sizes(List<String> newSizes) {
     _sizes = newSizes;
     notifyListeners();
+  }
+
+// ------------for ProductCard  Page displaying sneakers------------------//
+
+  late Future<List<Sneakers>> male;
+  late Future<List<Sneakers>> female;
+  late Future<List<Sneakers>> kids;
+
+  void getMale() {
+    male = Helper().getMaleSneakers();
+  }
+
+  void getFemale() {
+    female = Helper().getFemaleSneakers();
+  }
+
+  void getKids() {
+    kids = Helper().getKidsSneakers();
+  }
+
+// ------------for ProductPage displaying category items ------------------//
+  late Future<Sneakers> sneaker;
+  void getShoes(String category, String id) {
+    if (category == "Men's Shoes") {
+      sneaker = Helper().getMaleSneakersById(id);
+    } else if (category == "Women's Running") {
+      sneaker = Helper().getfemaleSneakersById(id);
+    } else {
+      sneaker = Helper().getKidsSneakersById(id);
+    }
+  }
+
+// ------------for Product Page createCart------------------//
+  final _cartBox = Hive.box('cart_box');
+
+  Future<void> createCart(Map<String, dynamic> newCart) async {
+    await _cartBox.add(newCart);
   }
 }

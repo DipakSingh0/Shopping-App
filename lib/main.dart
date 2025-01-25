@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:shop/controllers/cart_provider.dart';
 import 'package:shop/controllers/favorites_notifier.dart';
 import 'package:shop/controllers/product_notifier.dart';
 import 'package:shop/views/ui/main_screen.dart';
@@ -19,12 +20,16 @@ void main() async {
     ChangeNotifierProvider(create: (context) => MainScreenNotifier()),
     ChangeNotifierProvider(create: (context) => ProductNotifier()),
     ChangeNotifierProvider(create: (context) => FavoritesNotifier()),
-    // ChangeNotifierProvider(create: (context) => CartProvider()),
-
-
+    ChangeNotifierProvider(create: (context) => CartProvider()),
 
   ], child: const MyApp()));
 }
+
+//---------------to commit -------
+/**
+ 
+ migrated cartprovider , productprovider
+ */
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

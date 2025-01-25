@@ -13,9 +13,8 @@ class Sneakers {
   final String price;
   final String description;
   final String title;
-  final double ? ratings;
-  final double ? reviews;
-
+  final double? ratings;
+  final double? reviews;
 
   Sneakers({
     required this.id,
@@ -27,22 +26,22 @@ class Sneakers {
     required this.price,
     required this.description,
     required this.title,
-     this.ratings , 
-     this.reviews ,
+    this.ratings,
+    this.reviews,
   });
 
   // Factory method to create a Sneakers instance from JSON
   factory Sneakers.fromJson(Map<String, dynamic> json) => Sneakers(
-        id: json['id'] ?? '', 
-        name: json['name'] ?? '',  
-        category: json['category'] ?? '', 
-        imageUrl: List<String>.from(json['imageUrl'] ?? []), 
-        oldPrice: json['oldPrice'] ?? '',  
-        sizes: List<dynamic>.from(json['sizes']?.map((x) => x) ?? []), 
-        price: json['price'] ?? '',  
-        description: json['description'] ?? '',  
+        id: json['id'] ?? '',
+        name: json['name'] ?? '',
+        category: json['category'] ?? '',
+        imageUrl: List<String>.from(json['imageUrl'] ?? []),
+        oldPrice: json['oldPrice'] ?? '',
+        sizes: List<dynamic>.from(json['sizes']?.map((x) => x) ?? []),
+        price: json['price'] ?? '',
+        description: json['description'] ?? '',
         title: json['title'] ?? '',
-        ratings: json['ratings']?.toDouble() ?? '' , 
+        ratings: json['ratings']?.toDouble() ?? '',
         // reviews: json['reviews']?.toInt() ?? '' ,
         reviews: json['reviews']?.toInt() ?? '',
       );

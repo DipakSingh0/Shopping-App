@@ -8,8 +8,6 @@ import 'package:shop/views/ui/home_page.dart';
 import 'package:shop/views/ui/profile_page.dart';
 import 'package:shop/views/ui/search_page.dart';
 
-// import 'product_by_cart.dart';
-
 // ignore: must_be_immutable
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
@@ -25,7 +23,6 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // int pageIndex = 2;
 
     return Consumer<MainScreenNotifier>(
         builder: (context, mainScreenNotifier, child) {

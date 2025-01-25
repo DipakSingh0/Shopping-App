@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/controllers/mainscreen_notifier.dart';
-import 'package:shop/views/shared/bottom_nav_widget.dart';
+import 'package:shop/views/shared/bottom_nav_icon_widget.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -25,7 +25,7 @@ class BottomNavBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BottomNavWidget(
+                BottomNavIconWidget(
                   onTap: () {
                     mainScreenNotifier.pageIndex = 0;
                   },
@@ -33,7 +33,7 @@ class BottomNavBar extends StatelessWidget {
                       ? Icons.home
                       : Icons.home_outlined,
                 ),
-                BottomNavWidget(
+                BottomNavIconWidget(
                   // icon: Icons.search,
                   onTap: () {
                     mainScreenNotifier.pageIndex = 1;
@@ -42,7 +42,7 @@ class BottomNavBar extends StatelessWidget {
                       ? Icons.search
                       : Icons.search_outlined,
                 ),
-                BottomNavWidget(
+                BottomNavIconWidget(
                   // icon: Icons.add,
                   onTap: () {
                     mainScreenNotifier.pageIndex = 2;
@@ -51,7 +51,7 @@ class BottomNavBar extends StatelessWidget {
                       ? Icons.heart_broken_sharp
                       : Icons.heart_broken_outlined,
                 ),
-                BottomNavWidget(
+                BottomNavIconWidget(
                   // icon: Icons.shopping_cart,
                   onTap: () {
                     mainScreenNotifier.pageIndex = 3;
@@ -60,7 +60,7 @@ class BottomNavBar extends StatelessWidget {
                       ? Icons.shopping_cart
                       : Icons.shopping_cart_outlined,
                 ),
-                BottomNavWidget(
+                BottomNavIconWidget(
                   // icon: Icons.person,
                   onTap: () {
                     mainScreenNotifier.pageIndex = 4;
