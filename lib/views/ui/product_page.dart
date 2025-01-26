@@ -1,13 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
-import 'package:shop/controllers/favorites_notifier.dart';
-import 'package:shop/controllers/product_notifier.dart';
-import 'package:shop/models/sneakers_model.dart';
-import 'package:shop/views/shared/appstyle.dart';
-import 'package:shop/views/shared/checkout_buttton.dart';
-import 'package:shop/views/ui/favorites.dart';
+import '../shared/export.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.id, required this.category});
@@ -45,12 +36,13 @@ class _ProductPageState extends State<ProductPage> {
                 return Consumer<ProductNotifier>(
                     builder: (context, productNotifier, child) {
                   return CustomScrollView(
+                    scrollDirection: Axis.vertical,
                     slivers: [
                       SliverAppBar(
                         automaticallyImplyLeading: false,
                         leadingWidth: 0,
                         title: Padding(
-                          padding: EdgeInsets.only(bottom: 10),
+                          padding: EdgeInsets.only(bottom: 10.h),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -62,6 +54,7 @@ class _ProductPageState extends State<ProductPage> {
                                 child: const Icon(
                                   Icons.close,
                                   color: Colors.black,
+                                  size: 35,
                                 ),
                               ),
                               GestureDetector(
@@ -69,6 +62,7 @@ class _ProductPageState extends State<ProductPage> {
                                 child: const Icon(
                                   Icons.more_horiz,
                                   color: Colors.black,
+                                  size: 35,
                                 ),
                               ),
                             ],
@@ -82,8 +76,10 @@ class _ProductPageState extends State<ProductPage> {
                         flexibleSpace: FlexibleSpaceBar(
                           background: Stack(children: [
                             SizedBox(
-                              height: screenSize.height * 0.5,
-                              width: screenSize.width,
+                              // height: screenSize.height * 0.5,
+                              // width: screenSize.width,
+                              height: 401.h,
+                              width: 375.w,
                               child: PageView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: sneaker!.imageUrl.length,
@@ -95,17 +91,20 @@ class _ProductPageState extends State<ProductPage> {
                                   return Stack(
                                     children: [
                                       Container(
-                                        height: screenSize.height * 0.39,
-                                        width: screenSize.width * 0.39,
+                                        // height: screenSize.height * 0.39,
+                                        // width: screenSize.width * 0.39,
+                                        height: 316.h,
+                                        width: 375.w,
                                         color: Colors.grey.shade300,
                                         child: CachedNetworkImage(
                                           imageUrl: sneaker.imageUrl[index],
-                                          fit: BoxFit.contain,
+                                          fit: BoxFit.fill,
                                         ),
                                       ),
                                       Positioned(
-                                          top: screenSize.height * 0.10,
-                                          right: 20,
+                                          // top: screenSize.height * 0.10,
+                                          top: 98.h,
+                                          right: 20.w,
                                           child: Consumer<FavoritesNotifier>(
                                             builder: (context,
                                                 favoritesNotifier, child) {
@@ -200,7 +199,7 @@ class _ProductPageState extends State<ProductPage> {
                                         Center(
                                           child: Text(
                                             sneaker.name,
-                                            style: appStyle(40, Colors.black,
+                                            style: appStyle(25, Colors.black,
                                                 FontWeight.bold),
                                           ),
                                         ),
@@ -246,6 +245,9 @@ class _ProductPageState extends State<ProductPage> {
                                         // --------------------- Select Size ROW ----------------------------//
 
                                         SelectSizeRow(),
+                                        const SizedBox(
+                                          height: 12,
+                                        ),
 
                                         // ---------------------  Sizes List ROW ----------------------------//
 
@@ -267,7 +269,7 @@ class _ProductPageState extends State<ProductPage> {
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            60),
+                                                            50),
                                                     side: const BorderSide(
                                                       color: Colors.black,
                                                       width: 1,
@@ -301,6 +303,7 @@ class _ProductPageState extends State<ProductPage> {
                                                       productNotifier.sizes
                                                           .add(sizes['size']);
                                                     }
+
                                                     // print(productNotifier.sizes);
                                                   },
                                                 ),
@@ -330,7 +333,7 @@ class _ProductPageState extends State<ProductPage> {
                                               0.8,
                                           child: Text(
                                             sneaker.title,
-                                            style: appStyle(26, Colors.black,
+                                            style: appStyle(20, Colors.black,
                                                 FontWeight.w700),
                                           ),
                                         ),
@@ -345,6 +348,8 @@ class _ProductPageState extends State<ProductPage> {
                                         const SizedBox(
                                           height: 10,
                                         ),
+
+                                        //-------Add To Cart Button ----------------------//
                                         Align(
                                           alignment: Alignment.bottomCenter,
                                           child: Padding(
@@ -398,15 +403,14 @@ class SelectSizeRow extends StatelessWidget {
       children: [
         Text(
           "Select Sizes",
-          style: appStyle(20, Colors.black, FontWeight.w600),
-        ),
-        const SizedBox(width: 30),
-        Text(
-          "View size guide",
-          style: appStyle(20, Colors.grey, FontWeight.w600),
+          style: appStyle(18, Colors.black, FontWeight.w600),
         ),
         const SizedBox(
-          height: 12,
+          width: 40,
+        ),
+        Text(
+          "View size guide",
+          style: appStyle(18, Colors.grey, FontWeight.w600),
         ),
       ],
     );
@@ -428,10 +432,10 @@ class PriceRow extends StatelessWidget {
       children: [
         Text(
           "Rs ${sneaker?.price}",
-          style: appStyle(26, Colors.black, FontWeight.w600),
+          style: appStyle(25, Colors.black, FontWeight.w600),
         ),
         Padding(
-          padding: const EdgeInsets.only(right: 8.0),
+          padding: const EdgeInsets.only(right: 10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -448,14 +452,14 @@ class PriceRow extends StatelessWidget {
 
               const CircleAvatar(
                 radius: 7,
-                backgroundColor: Colors.black,
+                backgroundColor: Colors.red,
               ),
             ],
           ),
         ),
-        const SizedBox(
-          height: 12,
-        ),
+        // const SizedBox(
+        //   height: 10,
+        // ),
       ],
     );
   }

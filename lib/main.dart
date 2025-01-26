@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shop/controllers/cart_provider.dart';
 import 'package:shop/controllers/favorites_notifier.dart';
@@ -26,10 +27,6 @@ void main() async {
 }
 
 //---------------to commit -------
-/**
- 
- migrated cartprovider , productprovider
- */
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -37,10 +34,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'HomePage',
-      home: MainScreen(),
+    return ScreenUtilInit(
+      // designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+     builder: (context, child) {
+     return  MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'HomePage',
+        home: MainScreen(),
+      );
+      }
     );
   }
 }
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       title: 'HomePage',
+//       home: MainScreen(),
+//     );
+//   }
+// }

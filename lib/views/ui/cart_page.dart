@@ -1,10 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+
+
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:provider/provider.dart';
-import 'package:shop/controllers/cart_provider.dart';
-import 'package:shop/views/shared/appstyle.dart';
-import 'package:shop/views/shared/checkout_buttton.dart';
+import 'package:shop/views/shared/export.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -106,8 +103,8 @@ class _CartPageState extends State<CartPage> {
                                                   BorderRadius.circular(12),
                                               child: CachedNetworkImage(
                                                 imageUrl: data['imageUrl'],
-                                                width: 70,
-                                                height: 70,
+                                                width: 100,
+                                                height: 100,
                                                 fit: BoxFit.fill,
                                               ),
                                             ),
@@ -132,17 +129,17 @@ class _CartPageState extends State<CartPage> {
                                                       FontWeight.bold),
                                                 ),
                                                 const SizedBox(
-                                                  height: 4,
+                                                  height: 3,
                                                 ),
                                                 Text(
                                                   data['category'],
                                                   style: appStyle(
-                                                      16,
+                                                      14,
                                                       Colors.grey,
                                                       FontWeight.w600),
                                                 ),
                                                 const SizedBox(
-                                                  height: 5,
+                                                  height: 3,
                                                 ),
 
                                                 //--------- price row------------------------//
@@ -238,29 +235,23 @@ class PriceRow extends StatelessWidget {
     return Row(
       children: [
         Text(
-          data['price'],
-          style: appStyle(18, Colors.black, FontWeight.w600),
+          'Rs.${data['price']}', 
+          style: appStyle(16, Colors.black, FontWeight.w600),
         ),
         const SizedBox(
-          height: 5,
+          width: 35,
         ),
+       
         Text(
-          "${data['sizes']}",
+          "Size-",
           style: appStyle(18, Colors.black, FontWeight.w600),
         ),
-        const SizedBox(
-          width: 40,
-        ),
+        // const SizedBox(
+          // width: 8,
+        // ),
         Text(
-          "Size",
-          style: appStyle(18, Colors.black, FontWeight.w600),
-        ),
-        const SizedBox(
-          width: 15,
-        ),
-        Text(
-          "${data['sizes']}",
-          style: appStyle(18, Colors.black, FontWeight.w600),
+          data['sizes'].toString(),
+          style: appStyle(15, Colors.black, FontWeight.w600),
         ),
       ],
     );

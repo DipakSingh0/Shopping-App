@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:shop/controllers/product_notifier.dart';
-import 'package:shop/views/shared/appstyle.dart';
-import 'package:shop/views/shared/category_button.dart';
-import 'package:shop/views/shared/custom_spacer.dart';
-import 'package:shop/views/shared/latest_shoe.dart';
+import 'package:shop/views/shared/export.dart';
 
 class ProductByCart extends StatefulWidget {
   const ProductByCart({super.key, required this.tabIndex});
@@ -49,8 +42,9 @@ class _ProductByCartState extends State<ProductByCart>
           child: Stack(
             children: [
               Container(
-                  padding: const EdgeInsets.fromLTRB(10, 20, 0, 0),
-                  height: screenSize.height,
+                  padding: EdgeInsets.fromLTRB(8.w, 20.h, 0, 0),
+                  // height: screenSize.height,
+                  height: 325.h,
                   decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/images/top_image.jpg"),
@@ -97,8 +91,8 @@ class _ProductByCartState extends State<ProductByCart>
               Padding(
                 padding: EdgeInsets.only(
                   top: screenSize.height * 0.175,
-                  left: 16,
-                  right: 12,
+                  left: 16.w,
+                  right: 12.h,
                 ),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(16)),

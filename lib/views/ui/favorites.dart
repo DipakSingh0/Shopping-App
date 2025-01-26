@@ -1,8 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop/controllers/favorites_notifier.dart';
-import 'package:shop/views/shared/appstyle.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+// import 'package:shop/controllers/favorites_notifier.dart';
+// import 'package:shop/views/shared/appstyle.dart';
+// import 'package:shop/views/ui/main_screen.dart';
+
+import 'package:shop/views/shared/export.dart';
 import 'package:shop/views/ui/main_screen.dart';
 
 class Favorites extends StatefulWidget {

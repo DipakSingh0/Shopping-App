@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop/controllers/product_notifier.dart';
-import 'package:shop/views/shared/appstyle.dart';
+import 'package:shop/views/shared/export.dart';
 import 'package:shop/views/shared/home_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,8 +12,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 3, vsync: this);
 
-
-
   @override
   Widget build(BuildContext context) {
     var productNotifier = Provider.of<ProductNotifier>(context);
@@ -24,7 +19,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     productNotifier.getFemale();
     productNotifier.getKids();
 
-
+    var favoritesNotifier = Provider.of<FavoritesNotifier>(context);
+    favoritesNotifier.getFavorites();
 
     var screenSize = MediaQuery.of(context).size;
     return SafeArea(
@@ -32,11 +28,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         backgroundColor: Colors.grey.shade400,
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
+          // height: 812,
+          // width: 375,
           child: Stack(
             children: [
               Container(
                   padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
                   height: screenSize.height,
+                  // height: 812,
+                  // width: 375,
                   decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/images/top_image.jpg"),
@@ -44,11 +44,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   child: Container(
                     padding: const EdgeInsets.only(left: 8, bottom: 8),
                     width: screenSize.width,
-
+                    // width: 375,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Athletics Shoes \n Collection",
+                        Text("Athletics Shoes",
                             style: appStyleWithHt(
                                 34, Colors.white, FontWeight.bold, 1.5)),
                         TabBar(
@@ -71,15 +71,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   )),
               Padding(
                 padding: EdgeInsets.only(top: screenSize.height * 0.24),
+                // padding: EdgeInsets.only(top: 160.h),
+
                 child: Container(
-                  padding: const EdgeInsets.only(left: 8),
+                  // padding: const EdgeInsets.only(left: 8),
+                  padding: EdgeInsets.only(left: 8.h),
+
                   child: TabBarView(controller: _tabController, children: [
                     HomeWidget(
-                        ScreenSize: screenSize, male: productNotifier.male, tabIndex: 0),
+                        ScreenSize: screenSize,
+                        male: productNotifier.male,
+                        tabIndex: 0),
                     HomeWidget(
-                        ScreenSize: screenSize, male: productNotifier.female, tabIndex: 1),
+                        ScreenSize: screenSize,
+                        male: productNotifier.female,
+                        tabIndex: 1),
                     HomeWidget(
-                        ScreenSize: screenSize, male: productNotifier.kids, tabIndex: 2),
+                        ScreenSize: screenSize,
+                        male: productNotifier.kids,
+                        tabIndex: 2),
                   ]),
                 ),
               )

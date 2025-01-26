@@ -1,12 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop/controllers/mainscreen_notifier.dart';
-import 'package:shop/views/shared/bottom_nav_bar.dart';
+import 'package:shop/views/shared/export.dart';
 import 'package:shop/views/ui/cart_page.dart';
-import 'package:shop/views/ui/favorites.dart';
-import 'package:shop/views/ui/home_page.dart';
-import 'package:shop/views/ui/profile_page.dart';
-import 'package:shop/views/ui/search_page.dart';
 
 // ignore: must_be_immutable
 class MainScreen extends StatelessWidget {
@@ -23,7 +16,6 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Consumer<MainScreenNotifier>(
         builder: (context, mainScreenNotifier, child) {
       return Scaffold(

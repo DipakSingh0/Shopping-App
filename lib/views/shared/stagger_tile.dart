@@ -1,7 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
 
-import 'appstyle.dart';
+
+import 'package:shop/views/shared/export.dart';
 
 class StaggerTile extends StatefulWidget {
   const StaggerTile(
@@ -39,7 +38,7 @@ class _StaggerTileState extends State<StaggerTile> {
           Container(
             padding: const EdgeInsets.only(
                 top: 12), // Use 'const' with the constructor to improve
-            height: 75,
+            height: 75.h,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

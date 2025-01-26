@@ -1,14 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop/controllers/product_notifier.dart';
-import 'package:shop/models/sneakers_model.dart';
-import 'package:shop/views/ui/product_by_cart.dart';
-import '../ui/product_page.dart';
-import 'appstyle.dart';
-import 'new_shoes.dart';
-import 'product_card.dart';
+import 'package:shop/views/shared/export.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({
@@ -48,15 +40,15 @@ class HomeWidget extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         final shoe = snapshot.data![index];
-                        return 
-                        GestureDetector(
-                          onTap: (){
+                        return GestureDetector(
+                          onTap: () {
                             productNotifier.shoesSizes = shoe.sizes;
                             // print(productNotifier.shoesSizes);
-                            Navigator.push(context , 
-                            MaterialPageRoute(builder: (context) => 
-                            ProductPage(id: shoe.id , category : shoe.category)
-                            ));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProductPage(
+                                        id: shoe.id, category: shoe.category)));
                           },
                           child: ProductCard(
                             price: "Rs.${shoe.price}",
@@ -130,7 +122,7 @@ class HomeWidget extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: NewShoes(
-                            ScreenSize: ScreenSize,
+                            screenSize: ScreenSize,
                             imageUrl: shoe.imageUrl[0],
                           ),
                         );

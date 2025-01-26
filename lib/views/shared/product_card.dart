@@ -1,9 +1,4 @@
-import 'package:community_material_icon/community_material_icon.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop/controllers/favorites_notifier.dart';
-import 'package:shop/views/shared/appstyle.dart';
-import 'package:shop/views/ui/favorites.dart';
+import 'package:shop/views/shared/export.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard(
@@ -36,12 +31,16 @@ class _ProductCardState extends State<ProductCard> {
     favoritesNotifier.getFavorites();
     bool selected = true;
     return Padding(
-        padding: EdgeInsets.fromLTRB(8, 0, 20, 0),
+        // padding: EdgeInsets.fromLTRB(8, 0, 20, 0),
+
+        padding: EdgeInsets.fromLTRB(8.w, 0, 20.w, 0),
         child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(16)),
             child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width * 0.6,
+                // height: MediaQuery.of(context).size.height,
+                // width: MediaQuery.of(context).size.width * 0.65,
+                height: 335.h,
+                width: 225.w,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -56,7 +55,8 @@ class _ProductCardState extends State<ProductCard> {
                   Stack(
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.23,
+                        // height: MediaQuery.of(context).size.height * 0.23,
+                        height: 155.h,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(widget.image),
@@ -93,7 +93,7 @@ class _ProductCardState extends State<ProductCard> {
                     ],
                   ),
                   Padding(
-                      padding: EdgeInsets.only(left: 8),
+                      padding: EdgeInsets.only(left: 8.w),
                       child: Column(
                         children: [
                           Text(
@@ -107,7 +107,7 @@ class _ProductCardState extends State<ProductCard> {
                         ],
                       )),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    padding: EdgeInsets.only(left: 8.0.w, right: 8.0.h),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -141,14 +141,14 @@ class _ProductCardState extends State<ProductCard> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 12.0),
+                            padding: EdgeInsets.only(left: 12.0.w),
                             child: Icon(
                               Icons.star,
                               color: Colors.amber,
                               size: 18,
                             ),
                           ),
-                          SizedBox(width: 4),
+                          const SizedBox(width: 4),
                           Text(
                             widget.ratings.toString(),
                             style: TextStyle(

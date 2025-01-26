@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shop/models/sneakers_model.dart';
 import 'package:shop/views/shared/stagger_tile.dart';
@@ -28,8 +29,8 @@ class LatestShoes extends StatelessWidget {
             return MasonryGridView.count(
               padding: EdgeInsets.zero,
               crossAxisCount: 2,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 16,
+              crossAxisSpacing: 20.w,
+              mainAxisSpacing: 16.h,
               itemCount: male!.length,
               itemBuilder: (context, index) {
                 final shoe = snapshot.data![index];
